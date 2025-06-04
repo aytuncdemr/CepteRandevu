@@ -11,12 +11,12 @@ Müşteriler, platform üzerinden diledikleri işletmeleri ve hizmetleri seçere
 
 # 📱 Platform üzerinden neler yapılabilir?
 
-📌 Uygulama üzerinden işletme ve hizmet seçimi yaparak randevu oluşturabilirler.
-🌟 Hizmet aldıkları işletmelere yıldız verip yorum yapabilirler.
+📌 Kullanıcılar, uygulama üzerinden işletme ve hizmet seçimi yaparak randevu oluşturabilirler.
+🌟 Kullanıcılar, hizmet aldıkları işletmelere yıldız verip yorum yapabilirler.
 
-# İşletme tarafı:
-🧩 Kendi hesaplarını oluşturabilir, kategoriler ve hizmetler tanımlayabilirler.
-📆 Müşterilere hizmet verecekleri saatleri/günleri belirleyip randevu yönetimi yapabilirler.
+
+🧩 İşletmeler, kendi hesaplarını oluşturabilir, kategoriler ve hizmetler tanımlayabilirler.
+📆 İşletmeler, Müşterilere hizmet verecekleri saatleri/günleri belirleyip randevu yönetimi yapabilirler.
 
 # 🎯 Neden Bu Proje?
 KOBİ’lerin cirolarını artırmasına ve müşterilerin kolayca randevu almasına olanak tanıyan modern bir sistem geliştirmek istedik. Bu mobil uygulama sayesinde
@@ -27,12 +27,16 @@ hedefliyor.
 # Kullanılacak Teknolojiler
 Genel
 ✅ Git & Github
+
 ✅ Typescript
+
 ✅ Nodejs
 
 Frontend
 ✅ React Native
+
 ✅ TypeScript
+
 ✅ Axios
 ✅ TailwindCSS
 ✅ Material UI
