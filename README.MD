@@ -25,12 +25,12 @@ Ayrıca bu program, işletmelere ve müşterileri randevu hatırlatma özelliği
 hedefliyor.
 
 # Kullanılacak Teknolojiler
-Genel/
+Genel
 ✅ Git & Github
 ✅ Typescript
 ✅ Nodejs
 
-Frontend/
+Frontend
 ✅ React Native
 ✅ TypeScript
 ✅ Axios
@@ -42,11 +42,11 @@ Frontend/
 ✅ Lodash
 ✅ Font Awesome
 
-Backend/
+Backend
 ✅ Express.js
 ✅ Firebase (Firestore, Hosting, Auth)
 
-Dizayn/
+Dizayn
 ✅ Figma
 ✅ Slack
 
