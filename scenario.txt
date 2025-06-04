@@ -1,0 +1,48 @@
+kullanıcı uygulamayı açtıktan sonra giriş yap/kayıt ol sayfası önüne çıkacak.
+
+giriş yap/ kayıt ol sayfası:
+giriş bilgileri post /auth/login ile gönderilecek ve kullanıcı id'si dönülecek
+post /auth/register/business post /auth/register/customer ile kayıt olma yapılacak ve kullanıcı id dönülecek 
+post /auth/change-password ile otomatik rastgele bir şifre belirlenecek ve kullanıcının emailine iletilebilecek
+
+
+kullanıcı giriş yaptıktan sonra müşteri ise keşfet, işletme ise randevular sayfasına yönlendirilecek
+----------------------------------------
+müşteri sayfaları
+keşfet sayfası:
+AI destekli arama çubuğu olacak
+yana kaydırmalı işletmeleri gösteren bir bölge olacak
+aşağı kaydırmalı işletmeleri gösteren bir bölge olacak
+işletmelere basıldıktan sonra müşteri işletme sayfasına yönlendirilecek
+
+işletme sayfası:
+işletmenin genel bilgilerinin hizmetlerinin ve yorumlarının olduğu bilgiler gösterilecek
+randevu al butonu olacak ve basıldığında randevu alma sayfası açılacak
+randevu alma sayfası:
+randevu alma sayfasında servis kategorisi, servisi verecek kişi vs seçilecek
+
+hesabım sayfası:
+kullanıcı bilgileri gösterilecek
+düzenle gibi butonlar ile kullanıcı kendi bilgilerini güncelleyebilecek
+
+favoriler sayfası:
+kullanıcının favorilediği işletmelerin gösterildiği bir sayfa olacak
+
+randevular sayfası: 
+kullanıcının aldığı randevuları ve bilgilerini gösteren bir sayfa olacak
+
+bildirimler sayfası:
+kullanıcıya gelen bildirimlerin gösterildiği bir sayfa olacak
+--------------------------------------
+
+işletme sayfaları
+
+randevular sayfası:
+işletmeye alınan randevuların gösterildiği sayfa olacak
+
+yorumlar sayfası:
+kullanıcıların işletmeye yaptığı yorumlar gösterilecek
+
+hesabım sayfası:
+işletme sayfası ile aynı olacak fakat yorumlar olmayacak onun yerine
+hizmet ekleme çıkarma, çalışan ekleme çıkarma vs olacak.

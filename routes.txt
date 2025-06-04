@@ -1,0 +1,28 @@
+main route: /api/v1
+
+POST /auth/register/customer # create new user
+POST /auth/register/business # create new business
+POST /auth/login
+POST /auth/change-password
+
+GET /customers/:id # get a single customer
+GET /customers/:id/favorites # get businesses information of favorites
+PUT /customers/:id # update profile info
+POST /customers/:id/favorites/ # add a business to favorites
+DELETE /customers/:id # delete customer
+DELETE /customers/:id/favorites/:businessId # remove a business from favorites
+
+GET /businesses # get all businesses
+GET /businesses/:id # get single business
+PUT /businesses/:id # update business
+DELETE /business/:id # delete business
+
+GET /appointments/:id # get all appointments where customerId or businessId = :id
+POST /appointments/:id  # add appointment where businessId = :id
+DELETE /appointments/:id # delete appointment
+
+GET /notifications/:id # get all notifications where customerId or businessId = :id
+POST /notifications # add notification
+
+GET /comments/:id # get all appointments where businessId = :id
+POST /comments/:id # add comment where businessId = :id
