@@ -1,3 +1,8 @@
+interface LoginData{
+    email:string;
+    password:string;
+}
+
 interface Customer {
     // customers collection
     id: string;
