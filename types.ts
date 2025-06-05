@@ -63,7 +63,7 @@ interface Appointment {
     price: number;
     worker: string; // Murat
     date: string; // 2023-10-01
-    time: string; // 12.00, 12.30...
+    hour: string; // 12.00, 12.30...
 }
 
 interface Notification {
