@@ -51,6 +51,8 @@ Frontend
 
 ✅ TypeScript
 
+✅ React Navigation
+
 ✅ Axios
 
 ✅ TanStack Query
