@@ -53,6 +53,8 @@ Frontend
 
 ✅ Axios
 
+✅ TanStack Query
+
 ✅ TailwindCSS
 
 ✅ Material UI
