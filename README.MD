@@ -49,28 +49,15 @@ Frontend
 
 ✅ React Native
 
-✅ TypeScript
-
 ✅ React Navigation
 
 ✅ Axios
 
-✅ TanStack Query
-
 ✅ TailwindCSS
-
-✅ Material UI
 
 ✅ Toastify
 
-✅ react-select
-
-✅ react-fullcalendar
-
-✅ Lodash
-
 ✅ Font Awesome
-
 
 Backend
 
@@ -88,17 +75,14 @@ Dizayn
 
 # Görev Dağılımı
 
-Yönetim/ Aytunç Demir + Fatih Top 
+Yönetim/ Aytunç Demir 
+
+Yapay Zeka/ Fatih Top
 
 Frontend/ Aytunç Demir
 
 Backend/ Mert Temiz
 
-Yapay Zeka/ Fatih Top
-
 Dizayn/ Ahmet Eren Yavaş + Fatih Top
 
 Test/ Ahmet Eren Yavaş + Fatih Top
-
-
-

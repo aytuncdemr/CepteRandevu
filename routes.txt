@@ -1,30 +1,35 @@
 main route: /api/v1
 
-POST /auth/register/customer # create new user
-POST /auth/register/business # create new business
-POST /auth/login
-POST /auth/reset-password
+POST /auth/login {email,password} -> {id,accountType}
+POST /auth/register/ {email,password....,accountType} -> {message}
+POST /auth/reset-password {email} -> {message}
 
-GET /customers/:id # get a single customer
-GET /customers/:id/favorites # get businesses information of favorites
-PUT /customers/:id # update profile info
-POST /customers/:id/favorites/ # add a business to favorites
-DELETE /customers/:id # delete customer
-DELETE /customers/:id/favorites/:businessId # remove a business from favorites
+GET /customers/:id
+PUT /customers/:id 
+DELETE /customers/:id
 
-GET /businesses # get all businesses
-GET /businesses/categories # get business categories
-GET /businesses/:id # get single business
-PUT /businesses/:id # update business
-DELETE /business/:id # delete business
+GET /customers/:id/favorites
+POST /customers/:id/favorites
+DELETE /customers/:id/favorites
 
-GET /appointments/:id # get all appointments where customerId or businessId = :id
-POST /appointments/:id  # add appointment where businessId = :id
-DELETE /appointments/:id # delete appointment
+GET /businesses
+GET /businesses/:id
+PUT /businesses/:id
+DELETE /businesses/:id
 
-GET /notifications/:id # get all notifications where customerId or businessId = :id
-POST /notifications # add notification
-DELETE /notifications/:id # delete notification where customerId or businessId = :id
+GET /businesses/categories
 
-GET /comments/:id # get all appointments where businessId = :id
-POST /comments/:id # add comment where businessId = :id
+GET /appointments/customers/:id
+GET /appointments/businesses/:id
+
+POST /appointments/
+DELETE /appointments/:id
+
+GET /notifications/customers/:id
+GET /notifications/businesses/:id
+
+POST /notifications
+DELETE /notifications/:id
+
+GET /comments/businesses/:id
+POST /comments/businesses/:id 
