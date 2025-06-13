@@ -9,8 +9,12 @@ export default function RegisterScreen() {
     const route = useRoute<RouteProp<RootStackParamList, "RegisterScreen">>();
 
     return (
-        <ScrollView className="flex-1" keyboardShouldPersistTaps="handled">
-            <View className="px-4 py-4 pt-12">
+        <ScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            className="flex-1"
+            keyboardShouldPersistTaps="handled"
+        >
+            <View className="flex-1 px-4 py-4 pt-12">
                 <View className="mb-2">
                     <Text
                         className={
@@ -21,7 +25,7 @@ export default function RegisterScreen() {
                     </Text>
                 </View>
                 {route.params.isCustomer && (
-                    <View className="px-2 py-8">
+                    <View className="flex-1 px-2 py-8">
                         <FontAwesomeIcon
                             size={64}
                             icon={faUserCheck}
@@ -36,8 +40,8 @@ export default function RegisterScreen() {
                     </View>
                 )}
                 {!route.params.isCustomer && (
-                    <View>
-                        <View className="py-12">
+                    <View className="flex-1">
+                        <View className="flex-1 py-12">
                             <FontAwesomeIcon
                                 size={64}
                                 icon={faBusinessTime}

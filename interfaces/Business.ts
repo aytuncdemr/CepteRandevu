@@ -18,7 +18,7 @@ export interface Business {
     averageStar: number;
     accountType: "business";
 }
-interface ServiceCategory {
+export interface ServiceCategory {
     title: string;
-    services: {price:number,name:string}[];
+    services: { price: number; name: string }[];
 }

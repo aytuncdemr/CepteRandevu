@@ -8,7 +8,7 @@ import RootNavigation from "./navigation/RootNavigation";
 
 export default function App() {
     return (
-        <View className="flex-1">
+        <View className="flex-1 relative">
             <StatusBar style="dark" />
             <AuthContextProvider>
                 <RootNavigation></RootNavigation>

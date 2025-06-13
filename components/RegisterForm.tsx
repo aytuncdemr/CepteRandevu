@@ -14,7 +14,9 @@ import { Business } from "../interfaces/Business";
 import LoadingScreen from "../screens/global/LoadingScreen";
 import Toast from "react-native-toast-message";
 
+
 export default function RegisterForm({ isCustomer }: { isCustomer: boolean }) {
+
     const navigator = useNavigation<NavigationProp<RootStackParamList>>();
 
     async function registerAccountHandler(
@@ -364,7 +366,7 @@ function BusinessRegisterForm({
                     <TextInput
                         className="text-input w-3/4 mx-auto"
                         placeholder="Adres"
-                        onChangeText={handleChange("password")}
+                        onChangeText={handleChange("address")}
                         onBlur={handleBlur("address")}
                         value={values.address}
                     />
@@ -401,7 +403,7 @@ function BusinessRegisterForm({
                         }}
                     />
 
-                    <Pressable onPress={handleSubmit as any}>
+                    <Pressable onPress={() => registerAccountHandler(values as Omit<Business,"id">)}>
                         <View className="button-outer w-3/4 mx-auto">
                             <Text className="button-text">Kayıt Ol</Text>
                         </View>

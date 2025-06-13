@@ -11,6 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 import handleFetchError from "../utils/handleFetchError";
 import { RootStackParamList } from "../navigation/RootNavigation";
 import Modal from "react-native-modal";
+import Toast from "react-native-toast-message";
 
 const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -47,7 +48,7 @@ export default function SignInForm() {
             authContext?.setId(data.id);
 
             if (data.accountType === "customer") {
-                navigator.navigate("CustomerScreens");
+                navigator.navigate("CustomerNavigation");
             }
             if (data.accountType === "business") {
                 navigator.navigate("BusinessScreens");
@@ -56,6 +57,22 @@ export default function SignInForm() {
             handleFetchError(error);
         } finally {
             setSubmitting(false);
+        }
+    }
+
+    async function handlePasswordReset() {
+        try {
+            const { data } = await axios.post(
+                "http://127.0.0.1:3000/api/v1/auth/reset-password",
+                { email: "test@hotmail.com" }
+            );
+            Toast.show({
+                type: "success",
+                text1: "Başarılı",
+                text2: data.message,
+            });
+        } catch (error) {
+            handleFetchError(error);
         }
     }
 
@@ -192,14 +209,16 @@ export default function SignInForm() {
                     <Text className=" text-purple-500 font-semibold mb-4 text-center text-2xl">
                         Şifremi Unuttum
                     </Text>
+
                     <Text className="text-center">
-                        Şifrenizi sıfırlamanız için e-postanıza yeni şifrenizi göndereceğiz.
+                        Şifrenizi sıfırlamanız için e-postanıza yeni şifrenizi
+                        göndereceğiz.
                     </Text>
                     <TextInput
                         className="text-input mb-4 mt-12"
                         placeholder="E-posta"
                     ></TextInput>
-                    <Pressable>
+                    <Pressable onPress={handlePasswordReset}>
                         <View className="button-outer">
                             <Text className="button-text">Sıfırla</Text>
                         </View>

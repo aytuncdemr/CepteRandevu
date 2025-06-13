@@ -2,13 +2,13 @@ import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/global/LoginScreen";
 import RegisterScreen from "../screens/global/RegisterScreen";
-import CustomerBottomBar from "./CustomerBottomBar";
 import BusinessBottomBar from "./BusinessBottomBar";
 import { SafeAreaView } from "react-native";
+import CustomerNavigation from "./CustomerNavigation";
 
 export type RootStackParamList = {
     LoginScreen: undefined;
-    CustomerScreens: undefined;
+    CustomerNavigation: undefined;
     BusinessScreens: undefined;
     RegisterScreen: { isCustomer: boolean };
     ResetPasswordModal: undefined;
@@ -40,9 +40,10 @@ export default function RootNavigation() {
                     />
 
                     <Stack.Screen
-                        name="CustomerScreens"
-                        component={CustomerBottomBar}
+                        name="CustomerNavigation"
+                        component={CustomerNavigation}
                     ></Stack.Screen>
+
                     <Stack.Screen
                         name="BusinessScreens"
                         component={BusinessBottomBar}
