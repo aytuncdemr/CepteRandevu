@@ -457,9 +457,9 @@ app.get("/api/v1/appointments", (req, res) => {
         {
             id: "1",
             customer: "müşteri_001",
-            business: "işletme_001",
+            business: "Güzellik Dünyası",
             service: {
-                worker: "çalışan_001",
+                worker: "Ayşe Yılmaz",
                 name: "Klasik Cilt Bakımı",
                 price: 300,
             },
@@ -468,9 +468,9 @@ app.get("/api/v1/appointments", (req, res) => {
         {
             id: "2",
             customer: "müşteri_002",
-            business: "işletme_002",
+            business: "Elif Spa & Wellness",
             service: {
-                worker: "uzman_001",
+                worker: "Zeynep Korkmaz",
                 name: "Aromaterapi Masajı",
                 price: 600,
             },
@@ -479,9 +479,9 @@ app.get("/api/v1/appointments", (req, res) => {
         {
             id: "3",
             customer: "müşteri_003",
-            business: "işletme_003",
+            business: "Makyaj Atölyesi",
             service: {
-                worker: "makyöz_001",
+                worker: "Elif Demir",
                 name: "Gelin Makyajı",
                 price: 400,
             },
@@ -490,44 +490,48 @@ app.get("/api/v1/appointments", (req, res) => {
         {
             id: "4",
             customer: "müşteri_004",
-            business: "işletme_001",
-            service: { worker: "berber_001", name: "Saç Kesimi", price: 150 },
+            business: "BarberKing Erkek Kuaförü",
+            service: { worker: "Mehmet Kaya", name: "Saç Kesimi", price: 150 },
             date: "12/06/2025 14:20",
         },
         {
             id: "5",
             customer: "müşteri_005",
-            business: "işletme_002",
-            service: { worker: "çalışan_002", name: "Manikür", price: 120 },
+            business: "Nail Art Studio",
+            service: { worker: "Buse Arslan", name: "Manikür", price: 120 },
             date: "12/06/2025 15:00",
         },
         {
             id: "6",
             customer: "müşteri_006",
-            business: "işletme_003",
-            service: { worker: "uzman_002", name: "Detoks Bakımı", price: 500 },
+            business: "Elif Spa & Wellness",
+            service: {
+                worker: "Deniz Çetin",
+                name: "Detoks Bakımı",
+                price: 500,
+            },
             date: "12/06/2025 16:30",
         },
         {
             id: "7",
             customer: "müşteri_007",
-            business: "işletme_004",
-            service: { worker: "berber_002", name: "Sakal Tıraşı", price: 90 },
+            business: "BarberKing Erkek Kuaförü",
+            service: { worker: "Ali Can", name: "Sakal Tıraşı", price: 90 },
             date: "12/06/2025 17:15",
         },
         {
             id: "8",
             customer: "müşteri_008",
-            business: "işletme_002",
-            service: { worker: "kuaför_001", name: "Fön", price: 70 },
+            business: "Kuaför Stil",
+            service: { worker: "Selin Öztürk", name: "Fön", price: 70 },
             date: "12/06/2025 18:00",
         },
         {
             id: "9",
             customer: "müşteri_009",
-            business: "işletme_005",
+            business: "Huzur Spa Merkezi",
             service: {
-                worker: "masöz_001",
+                worker: "Emine Aydın",
                 name: "Derin Doku Masajı",
                 price: 750,
             },
@@ -536,9 +540,9 @@ app.get("/api/v1/appointments", (req, res) => {
         {
             id: "10",
             customer: "müşteri_010",
-            business: "işletme_001",
+            business: "Güzellik Dünyası",
             service: {
-                worker: "uzman_003",
+                worker: "Fatma Koç",
                 name: "Anti-Aging Bakım",
                 price: 450,
             },

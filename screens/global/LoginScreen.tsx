@@ -1,4 +1,4 @@
-import { Platform, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 import SignInForm from "../../components/SignInForm";
 
 export default function LoginScreen() {

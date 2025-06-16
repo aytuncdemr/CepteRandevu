@@ -13,16 +13,22 @@ import { RootStackParamList } from "../navigation/RootNavigation";
 import { Business } from "../interfaces/Business";
 import LoadingScreen from "../screens/global/LoadingScreen";
 import Toast from "react-native-toast-message";
-
+import ImageUploader from "./ImageUploader";
 
 export default function RegisterForm({ isCustomer }: { isCustomer: boolean }) {
-
     const navigator = useNavigation<NavigationProp<RootStackParamList>>();
 
     async function registerAccountHandler(
         accountInfo: Omit<Customer, "id"> | Omit<Business, "id">
     ) {
         try {
+            if (
+                accountInfo.accountType === "business" &&
+                accountInfo.pictures.length === 0
+            ) {
+                throw new Error("Lütfen en az 1 fotoğraf yükleyiniz");
+            }
+
             const { data } = await axios.post(
                 "http://127.0.0.1:3000/api/v1/auth/register",
                 accountInfo
@@ -250,7 +256,8 @@ function BusinessRegisterForm({
         workers: Yup.array().of(Yup.string()).required(),
     });
 
-    const [open, setOpen] = useState(false);
+    const [categoryOpen, setCategoryOpen] = useState(false);
+    const [cityOpen, setCityOpen] = useState(false);
 
     const [categories, setCategories] = useState<string[] | null>(null);
 
@@ -258,7 +265,7 @@ function BusinessRegisterForm({
         async function getCategories() {
             try {
                 const { data } = await axios.get(
-                    "http://127.0.0.1:3000/api/v1/business/categories"
+                    "http://10.0.2.2:3000/api/v1/business/categories"
                 );
                 setCategories(data);
             } catch (error) {
@@ -271,7 +278,6 @@ function BusinessRegisterForm({
     if (!categories) {
         return <LoadingScreen></LoadingScreen>;
     }
-
     return (
         <Formik
             initialValues={{
@@ -315,6 +321,7 @@ function BusinessRegisterForm({
                         onBlur={handleBlur("name")}
                         value={values.name}
                     />
+
                     {touched.name && errors.name && (
                         <Text className="text-red-500 text-center">
                             {errors.name}
@@ -357,7 +364,6 @@ function BusinessRegisterForm({
                         onBlur={handleBlur("password")}
                         value={values.password}
                     />
-
                     {touched.password && errors.password && (
                         <Text className="text-red-500 text-center">
                             {errors.password}
@@ -378,10 +384,10 @@ function BusinessRegisterForm({
 
                     <DropDownPicker
                         listMode="SCROLLVIEW"
-                        open={open}
+                        open={categoryOpen}
                         value={values.category}
                         items={categories.map((c) => ({ label: c, value: c }))}
-                        setOpen={setOpen}
+                        setOpen={setCategoryOpen}
                         setValue={(callback) => {
                             const selected = callback(values.category);
                             setFieldValue("category", selected);
@@ -392,7 +398,6 @@ function BusinessRegisterForm({
                         style={{
                             borderWidth: 1,
                             borderColor: "#ddd",
-                            marginBottom: 12,
                         }}
                         dropDownContainerStyle={{
                             width: "100%",
@@ -402,8 +407,60 @@ function BusinessRegisterForm({
                             alignSelf: "center",
                         }}
                     />
+                    <DropDownPicker
+                        listMode="SCROLLVIEW"
+                        open={cityOpen}
+                        value={values.city}
+                        items={cities.map((c) => ({ label: c, value: c }))}
+                        setOpen={setCityOpen}
+                        setValue={(callback) => {
+                            const selected = callback(values.city);
+                            setFieldValue("city", selected);
+                        }}
+                        placeholder="Bir şehir seçiniz..."
+                        zIndex={2000}
+                        containerStyle={{ width: "75%", alignSelf: "center" }}
+                        style={{
+                            borderWidth: 1,
+                            borderColor: "#ddd",
+                        }}
+                        dropDownContainerStyle={{
+                            width: "100%",
+                            marginTop: 8,
+                            borderWidth: 1,
+                            borderColor: "#ddd",
+                            alignSelf: "center",
+                        }}
+                    />
+                    {touched.city && errors.city && (
+                        <Text className="text-red-500 text-center">
+                            {errors.city}
+                        </Text>
+                    )}
 
-                    <Pressable onPress={() => registerAccountHandler(values as Omit<Business,"id">)}>
+                    <ImageUploader
+                        setFieldValue={setFieldValue}
+                    ></ImageUploader>
+                    {touched.pictures && errors.pictures && (
+                        <Text className="text-red-500 text-center">
+                            {errors.pictures}
+                        </Text>
+                    )}
+
+                    <TextInput
+                        className="text-input w-3/4 mx-auto"
+                        placeholder="Açıklama"
+                        onChangeText={handleChange("description")}
+                        onBlur={handleBlur("description")}
+                        value={values.description}
+                    />
+                    {touched.description && errors.description && (
+                        <Text className="text-red-500 text-center">
+                            {errors.description}
+                        </Text>
+                    )}
+
+                    <Pressable onPress={handleSubmit as any}>
                         <View className="button-outer w-3/4 mx-auto">
                             <Text className="button-text">Kayıt Ol</Text>
                         </View>

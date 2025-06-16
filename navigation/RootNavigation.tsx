@@ -11,7 +11,6 @@ export type RootStackParamList = {
     CustomerNavigation: undefined;
     BusinessScreens: undefined;
     RegisterScreen: { isCustomer: boolean };
-    ResetPasswordModal: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

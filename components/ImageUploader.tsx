@@ -1,46 +1,103 @@
-// import React, { useState } from 'react';
-// import { Button, Image, View } from 'react-native';
-// import * as ImagePicker from 'expo-image-picker';
-// import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-// import { storage } from './firebaseConfig';
+import React, { useState } from "react";
+import { Pressable, Text, View } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
-// export default function ImageUploader() {
-//     const [image, setImage] = useState(null);
-//     const [uploading, setUploading] = useState(false);
+import { supabase } from "../data/supaBaseConfig";
+import { FormikErrors } from "formik";
+import Toast from "react-native-toast-message";
+import handleFetchError from "../utils/handleFetchError";
 
-//     const pickImage = async () => {
-//         const result = await ImagePicker.launchImageLibraryAsync({
-//             mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//             quality: 1,
-//         });
+export default function ImageUploader({
+    setFieldValue,
+}: {
+    setFieldValue: (
+        field: string,
+        value: any,
+        shouldValidate?: boolean
+    ) => Promise<void | FormikErrors<any>>;
+}) {
+    const [image, setImage] = useState<string | null>(null);
+    const [uploading, setUploading] = useState(false);
 
-//         if (!result.canceled) {
-//             setImage(result.assets[0].uri);
-//         }
-//     };
+    async function pickImage() {
+        try {
+            const { granted } =
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-//     const uploadImage = async () => {
-//         if (!image) return;
+            if (!granted) {
+                Toast.show({
+                    type: "error",
+                    text1: "Hata",
+                    text2: "Lütfen gerekli izinleri verin",
+                });
+                return;
+            }
 
-//         setUploading(true);
-//         const response = await fetch(image);
-//         const blob = await response.blob();
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ["images"],
+                quality: 1,
+            });
 
-//         const filename = `images/${Date.now()}.jpg`;
-//         const storageRef = ref(storage, filename);
+            if (!result.canceled && result.assets.length > 0) {
+                const pickedUri = result.assets[0].uri;
+                setImage(pickedUri);
+                await uploadImage(pickedUri);
+            }
+        } catch (error) {
+            handleFetchError(error);
+        }
+    }
 
-//         await uploadBytes(storageRef, blob);
-//         const downloadURL = await getDownloadURL(storageRef);
+    async function uploadImage(uri: string) {
+        try {
+            setUploading(true);
+            const response = await fetch(
+                "https://www.creativecoloursolutions.com.au/wp-content/uploads/2011/05/400x400.png"
+            );
+            const blob = await response.blob();
 
-//         console.log('Image uploaded! Download URL:', downloadURL);
-//         setUploading(false);
-//     };
+            const filename = `${Date.now()}.png`; // Correct extension
+            const file = new File([blob], filename, { type: blob.type });
 
-//     return (
-//         <View className="p-4 items-center">
-//             <Button title="Pick Image" onPress={pickImage} />
-//             {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginVertical: 20 }} />}
-//             <Button title="Upload Image" onPress={uploadImage} disabled={uploading} />
-//         </View>
-//     );
-// }
+            const { error } = await supabase.storage
+                .from("photos")
+                .upload(filename, file, { upsert: true });
+
+            if (error) {
+                console.error("Upload error:", error.message);
+                throw new Error("Fotoğraf yüklemesi başarısız oldu");
+            }
+
+            // const { data: publicUrlData } = supabase.storage
+            //     .from("pictures")
+            //     .getPublicUrl("test.jpg");
+
+            // const url = publicUrlData?.publicUrl;
+            // if (!url) {
+            //     throw new Error("Fotoğraf URL alınamadı");
+            // }
+
+            // await setFieldValue("pictures", [url]);
+        } catch (error) {
+            handleFetchError(error);
+        } finally {
+            setUploading(false);
+        }
+    }
+
+    return (
+        <View
+            className={`${
+                image && "bg-green-500"
+            } border border-gray-300 w-3/4 rounded-lg mx-auto p-4`}
+        >
+            <Pressable onPress={image ? () => {} : pickImage}>
+                <Text className={`text-center ${image && "text-white"}`}>
+                    {image
+                        ? image.slice(0, 24) + "..."
+                        : "Kapak Fotoğrafı yükleyin"}
+                </Text>
+            </Pressable>
+        </View>
+    );
+}

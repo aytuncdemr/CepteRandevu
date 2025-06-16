@@ -6,16 +6,13 @@ POST /auth/reset-password {email} -> {message}
 
 GET /customers/:id
 PUT /customers/:id 
-DELETE /customers/:id
 
 GET /customers/:id/favorites
 POST /customers/:id/favorites
-DELETE /customers/:id/favorites
 
 GET /businesses
 GET /businesses/:id
 PUT /businesses/:id
-DELETE /businesses/:id
 
 GET /businesses/categories
 
@@ -23,13 +20,10 @@ GET /appointments/customers/:id
 GET /appointments/businesses/:id
 
 POST /appointments/
-DELETE /appointments/:id
 
 GET /notifications/customers/:id
-GET /notifications/businesses/:id
 
 POST /notifications
-DELETE /notifications/:id
 
 GET /comments/businesses/:id
 POST /comments/businesses/:id 
