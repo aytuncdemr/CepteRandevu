@@ -44,7 +44,6 @@ export default function SignInForm() {
                     password: values.password,
                 }
             );
-
             authContext?.setId(data.id);
 
             if (data.accountType === "customer") {

@@ -38,7 +38,7 @@ export default function AccountInformation() {
                 const { data } = await axios.get(
                     `http://127.0.0.1:3000/api/v1/customers/${authContext?.id}`
                 );
-                setCustomer(data);
+                setCustomer(data as Customer);
             } catch (error) {
                 handleFetchError(error);
             }
@@ -52,7 +52,7 @@ export default function AccountInformation() {
         actions: FormikHelpers<Customer>
     ) {
         try {
-            const { data } = await axios.put(
+            const { data } = await axios.put<{ message: string }>(
                 `http://127.0.0.1:3000/api/v1/customers/${authContext?.id}`,
                 values
             );

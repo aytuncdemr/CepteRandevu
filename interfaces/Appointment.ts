@@ -2,8 +2,6 @@ export interface Appointment {
     id: string;
     customer: string;
     business: string;
-    service: { title: string; name: string; price: number };
-    worker: string;
+    service: { worker: string; name: string; price: number };
     date: string;
-    hour: string;
 }

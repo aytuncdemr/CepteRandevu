@@ -90,7 +90,252 @@ app.post("/api/v1/auth/reset-password", (req, res) => {
     res.end();
 });
 
-app.get("/api/v1/customers/", (req, res) => {
+app.get("/api/v1/auth/reset-password", (req, res) => {
+    // ....
+    // nodemail ....
+
+    res.send({
+        message: `Yeni şifreniz e-postanıza ${req.body.email} başarıyla gönderildi`,
+    });
+    res.end();
+});
+
+app.get("/api/v1/notifications", (req, res) => {
+    res.send([
+        {
+            id: "1",
+            title: "Yeni Mesaj",
+            description: "Müşteri destek ekibinden yeni bir mesajınız var.",
+            date: "16/06/2025 09:00",
+            isRead: false,
+            customer: "musteri_001",
+            business: "isletme_001",
+        },
+        {
+            id: "2",
+            title: "Randevu Hatırlatıcısı",
+            description: "Yarın saat 10:00’da bir randevunuz var.",
+            date: "15/06/2025 08:30",
+            isRead: true,
+            customer: "musteri_002",
+            business: "isletme_002",
+        },
+        {
+            id: "3",
+            title: "Ödeme Başarılı",
+            description: "Yapmış olduğunuz ödeme başarıyla işlendi.",
+            date: "14/06/2025 12:15",
+            isRead: true,
+            customer: "musteri_003",
+            business: "isletme_001",
+        },
+        {
+            id: "4",
+            title: "Yeni Kampanya",
+            description: "Tüm hizmetlerde yaz indirimlerimizi kaçırmayın!",
+            date: "13/06/2025 15:45",
+            isRead: false,
+            customer: "musteri_004",
+            business: "isletme_003",
+        },
+        {
+            id: "5",
+            title: "Hizmet Tamamlandı",
+            description:
+                "Aldığınız hizmet başarıyla tamamlandı. Teşekkür ederiz!",
+            date: "12/06/2025 11:00",
+            isRead: true,
+            customer: "musteri_005",
+            business: "isletme_002",
+        },
+        {
+            id: "6",
+            title: "Geri Bildirim Talebi",
+            description:
+                "Son ziyaretiniz için geri bildirim bırakmayı unutmayın.",
+            date: "11/06/2025 17:20",
+            isRead: false,
+            customer: "musteri_006",
+            business: "isletme_003",
+        },
+        {
+            id: "7",
+            title: "Güncelleme Bildirimi",
+            description: "Hizmet şartlarımız güncellendi. Detayları inceleyin.",
+            date: "10/06/2025 10:00",
+            isRead: false,
+            customer: "musteri_007",
+            business: "isletme_001",
+        },
+        {
+            id: "8",
+            title: "Abonelik Süresi Doldu",
+            description:
+                "Aboneliğinizin süresi doldu. Yenilemek için tıklayın.",
+            date: "09/06/2025 09:30",
+            isRead: true,
+            customer: "musteri_008",
+            business: "isletme_002",
+        },
+        {
+            id: "9",
+            title: "Hediye Çeki Kazandınız",
+            description: "50₺ değerinde hediye çeki kazandınız!",
+            date: "08/06/2025 13:40",
+            isRead: false,
+            customer: "musteri_009",
+            business: "isletme_003",
+        },
+        {
+            id: "10",
+            title: "Güvenlik Uyarısı",
+            description: "Hesabınıza yeni bir giriş tespit edildi.",
+            date: "07/06/2025 21:15",
+            isRead: true,
+            customer: "musteri_010",
+            business: "isletme_001",
+        },
+    ]);
+});
+
+app.get("/api/v2/customers/:id/favorites", (req, res) => {
+    // ....
+    // nodemail ....
+
+    res.send([
+        {
+            id: "1",
+            name: "Güzellik Dünyası",
+            phone: "+90 532 123 45 67",
+            email: "info@guzellikdunyasi.com",
+            password: "hashedpassword1",
+            pictures: ["https://example.com/salon1.jpg"],
+            favorites: 120,
+            category: "Güzellik Salonu",
+            city: "İstanbul",
+            description: "Profesyonel bakım ve güzellik hizmetleri sunuyoruz.",
+            address: "Bağdat Caddesi No:25 Kadıköy/İstanbul",
+            date: "06/11/2025 12:50",
+            workDays: [
+                "Pazartesi",
+                "Salı",
+                "Çarşamba",
+                "Perşembe",
+                "Cuma",
+                "Cumartesi",
+            ],
+            workHours: ["09:00 - 18:00"],
+            serviceCategories: [
+                {
+                    title: "Cilt Bakımı",
+                    services: [
+                        { price: 300, name: "Klasik Cilt Bakımı" },
+                        { price: 450, name: "Anti-Aging Bakım" },
+                    ],
+                },
+                {
+                    title: "Makyaj",
+                    services: [
+                        { price: 250, name: "Günlük Makyaj" },
+                        { price: 400, name: "Gelin Makyajı" },
+                    ],
+                },
+            ],
+            workers: ["çalışan_001", "çalışan_002"],
+            averageStar: 4.8,
+            accountType: "business",
+        },
+        {
+            id: "2",
+            name: "BarberKing Erkek Kuaförü",
+            phone: "+90 530 987 65 43",
+            email: "iletisim@barberking.com",
+            password: "hashedpassword2",
+            pictures: ["https://example.com/barber1.jpg"],
+            favorites: 85,
+            category: "Kuaför",
+            city: "Ankara",
+            description: "Modern erkek kuaför hizmetleri, tıraş ve bakım.",
+            address: "Atatürk Bulvarı No:10 Çankaya/Ankara",
+            date: "06/11/2025 12:50",
+            workDays: [
+                "Pazartesi",
+                "Salı",
+                "Çarşamba",
+                "Perşembe",
+                "Cuma",
+                "Cumartesi",
+                "Pazar",
+            ],
+            workHours: ["10:00 - 20:00"],
+            serviceCategories: [
+                {
+                    title: "Saç",
+                    services: [
+                        { price: 150, name: "Saç Kesimi" },
+                        { price: 70, name: "Fön" },
+                    ],
+                },
+                {
+                    title: "Sakal",
+                    services: [
+                        { price: 90, name: "Sakal Tıraşı" },
+                        { price: 120, name: "Sakal Şekillendirme" },
+                    ],
+                },
+            ],
+            workers: ["calisan_101", "calisan_102", "calisan_103"],
+            averageStar: 4.5,
+            accountType: "business",
+        },
+        {
+            id: "3",
+            name: "Elif Spa & Wellness",
+            phone: "+90 505 456 78 90",
+            email: "spa@elifwellness.com",
+            password: "hashedpassword3",
+            pictures: ["https://example.com/spa1.jpg"],
+            favorites: 200,
+            category: "Spa Merkezi",
+            city: "İzmir",
+            description:
+                "Rahatlatıcı ve yenileyici spa deneyimi için sizi bekliyoruz.",
+            address: "Alsancak Mahallesi, Cumhuriyet Bulvarı No:55 Konak/İzmir",
+            date: "06/11/2025 12:50",
+            workDays: [
+                "Salı",
+                "Çarşamba",
+                "Perşembe",
+                "Cuma",
+                "Cumartesi",
+                "Pazar",
+            ],
+            workHours: ["11:00 - 22:00"],
+            serviceCategories: [
+                {
+                    title: "Masajlar",
+                    services: [
+                        { price: 600, name: "Aromaterapi Masajı" },
+                        { price: 750, name: "Derin Doku Masajı" },
+                    ],
+                },
+                {
+                    title: "Vücut Bakımı",
+                    services: [
+                        { price: 400, name: "Vücut Peelingi" },
+                        { price: 500, name: "Detoks Bakımı" },
+                    ],
+                },
+            ],
+            workers: ["uzman_201", "uzman_202"],
+            averageStar: 4.9,
+            accountType: "business",
+        },
+    ]);
+    res.end();
+});
+
+app.get("/api/v1/customers", (req, res) => {
     console.log("HIT!");
     res.send({
         id: "123",
@@ -105,9 +350,201 @@ app.get("/api/v1/customers/", (req, res) => {
         accountType: "customer",
     }).end();
 });
-app.put("/api/v1/customers/", (req, res) => {
+app.put("/api/v1/customers", (req, res) => {
     console.log("HIT!");
     res.send({ message: "Değişiklikler başarıyla kayıt edildi" }).end();
+});
+
+[
+    {
+        id: "1",
+        customer: "müşteri_001",
+        business: "işletme_001",
+        service: {
+            title: "Cilt Bakımı",
+            name: "Klasik Cilt Bakımı",
+            price: 300,
+        },
+        worker: "çalışan_001",
+        date: "12/06/2025 10:35",
+        hour: "10:30",
+    },
+    {
+        id: "2",
+        customer: "müşteri_002",
+        business: "işletme_002",
+        service: { title: "Masaj", name: "Aromaterapi Masajı", price: 600 },
+        worker: "uzman_001",
+        date: "12/06/2025 11:15",
+        hour: "11:15",
+    },
+    {
+        id: "3",
+        customer: "müşteri_003",
+        business: "işletme_003",
+        service: { title: "Makyaj", name: "Gelin Makyajı", price: 400 },
+        worker: "makyöz_001",
+        date: "12/06/2025 13:00",
+        hour: "13:00",
+    },
+    {
+        id: "4",
+        customer: "müşteri_004",
+        business: "işletme_001",
+        service: { title: "Saç", name: "Saç Kesimi", price: 150 },
+        worker: "berber_001",
+        date: "12/06/2025 14:20",
+        hour: "14:20",
+    },
+    {
+        id: "5",
+        customer: "müşteri_005",
+        business: "işletme_002",
+        service: { title: "Tırnak", name: "Manikür", price: 120 },
+        worker: "çalışan_002",
+        date: "12/06/2025 15:00",
+        hour: "15:00",
+    },
+    {
+        id: "6",
+        customer: "müşteri_006",
+        business: "işletme_003",
+        service: { title: "Vücut Bakımı", name: "Detoks Bakımı", price: 500 },
+        worker: "uzman_002",
+        date: "12/06/2025 16:30",
+        hour: "16:30",
+    },
+    {
+        id: "7",
+        customer: "müşteri_007",
+        business: "işletme_004",
+        service: { title: "Sakal", name: "Sakal Tıraşı", price: 90 },
+        worker: "berber_002",
+        date: "12/06/2025 17:15",
+        hour: "17:15",
+    },
+    {
+        id: "8",
+        customer: "müşteri_008",
+        business: "işletme_002",
+        service: { title: "Saç", name: "Fön", price: 70 },
+        worker: "kuaför_001",
+        date: "12/06/2025 18:00",
+        hour: "18:00",
+    },
+    {
+        id: "9",
+        customer: "müşteri_009",
+        business: "işletme_005",
+        service: { title: "Masaj", name: "Derin Doku Masajı", price: 750 },
+        worker: "masöz_001",
+        date: "12/06/2025 19:30",
+        hour: "19:30",
+    },
+    {
+        id: "10",
+        customer: "müşteri_010",
+        business: "işletme_001",
+        service: { title: "Cilt Bakımı", name: "Anti-Aging Bakım", price: 450 },
+        worker: "uzman_003",
+        date: "12/06/2025 20:15",
+        hour: "20:15",
+    },
+];
+
+app.get("/api/v1/appointments", (req, res) => {
+    res.send([
+        {
+            id: "1",
+            customer: "müşteri_001",
+            business: "işletme_001",
+            service: {
+                worker: "çalışan_001",
+                name: "Klasik Cilt Bakımı",
+                price: 300,
+            },
+            date: "12/06/2025 10:30",
+        },
+        {
+            id: "2",
+            customer: "müşteri_002",
+            business: "işletme_002",
+            service: {
+                worker: "uzman_001",
+                name: "Aromaterapi Masajı",
+                price: 600,
+            },
+            date: "12/06/2025 11:15",
+        },
+        {
+            id: "3",
+            customer: "müşteri_003",
+            business: "işletme_003",
+            service: {
+                worker: "makyöz_001",
+                name: "Gelin Makyajı",
+                price: 400,
+            },
+            date: "12/06/2025 13:00",
+        },
+        {
+            id: "4",
+            customer: "müşteri_004",
+            business: "işletme_001",
+            service: { worker: "berber_001", name: "Saç Kesimi", price: 150 },
+            date: "12/06/2025 14:20",
+        },
+        {
+            id: "5",
+            customer: "müşteri_005",
+            business: "işletme_002",
+            service: { worker: "çalışan_002", name: "Manikür", price: 120 },
+            date: "12/06/2025 15:00",
+        },
+        {
+            id: "6",
+            customer: "müşteri_006",
+            business: "işletme_003",
+            service: { worker: "uzman_002", name: "Detoks Bakımı", price: 500 },
+            date: "12/06/2025 16:30",
+        },
+        {
+            id: "7",
+            customer: "müşteri_007",
+            business: "işletme_004",
+            service: { worker: "berber_002", name: "Sakal Tıraşı", price: 90 },
+            date: "12/06/2025 17:15",
+        },
+        {
+            id: "8",
+            customer: "müşteri_008",
+            business: "işletme_002",
+            service: { worker: "kuaför_001", name: "Fön", price: 70 },
+            date: "12/06/2025 18:00",
+        },
+        {
+            id: "9",
+            customer: "müşteri_009",
+            business: "işletme_005",
+            service: {
+                worker: "masöz_001",
+                name: "Derin Doku Masajı",
+                price: 750,
+            },
+            date: "12/06/2025 19:30",
+        },
+        {
+            id: "10",
+            customer: "müşteri_010",
+            business: "işletme_001",
+            service: {
+                worker: "uzman_003",
+                name: "Anti-Aging Bakım",
+                price: 450,
+            },
+            date: "12/06/2025 20:15",
+        },
+    ]);
 });
 
 app.get("/api/v1/businesses/", (req, res) => {

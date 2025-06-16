@@ -3,7 +3,6 @@ export interface Notification {
     title: string;
     description: string;
     date: string;
-    isRead: boolean;
     customer: string;
     business: string;
 }
