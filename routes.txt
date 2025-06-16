@@ -1,7 +1,8 @@
 main route: /api/v1
 
 POST /auth/login {email,password} -> {id,accountType}
-POST /auth/register/ {email,password....,accountType} -> {message}
+POST /auth/register/business {email,password....,accountType} -> {message}
+POST /auth/register/customer {email,password....,accountType} -> {message}
 POST /auth/reset-password {email} -> {message}
 
 GET /customers/:id
