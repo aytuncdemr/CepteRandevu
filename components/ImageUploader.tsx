@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-
-import { supabase } from "../data/supaBaseConfig";
 import { FormikErrors } from "formik";
 import Toast from "react-native-toast-message";
 import handleFetchError from "../utils/handleFetchError";
+import * as FileSystem from "expo-file-system";
 
 export default function ImageUploader({
     setFieldValue,
@@ -17,7 +16,6 @@ export default function ImageUploader({
     ) => Promise<void | FormikErrors<any>>;
 }) {
     const [image, setImage] = useState<string | null>(null);
-    const [uploading, setUploading] = useState(false);
 
     async function pickImage() {
         try {
@@ -50,38 +48,30 @@ export default function ImageUploader({
 
     async function uploadImage(uri: string) {
         try {
-            setUploading(true);
-            const response = await fetch(
-                "https://www.creativecoloursolutions.com.au/wp-content/uploads/2011/05/400x400.png"
-            );
-            const blob = await response.blob();
+            const base64 = await FileSystem.readAsStringAsync(uri, {
+                encoding: FileSystem.EncodingType.Base64,
+            });
 
-            const filename = `${Date.now()}.png`; // Correct extension
-            const file = new File([blob], filename, { type: blob.type });
+            const formData = new FormData();
+            formData.append("key", "1fb423329d681c28468c19033de51a76");
+            formData.append("image", base64);
 
-            const { error } = await supabase.storage
-                .from("photos")
-                .upload(filename, file, { upsert: true });
+            const res = await fetch("https://api.imgbb.com/1/upload", {
+                method: "POST",
+                body: formData,
+            });
 
-            if (error) {
-                console.error("Upload error:", error.message);
-                throw new Error("Fotoğraf yüklemesi başarısız oldu");
+            const json = await res.json();
+
+            if (!json.success) {
+                throw new Error("ImgBB upload failed");
             }
 
-            // const { data: publicUrlData } = supabase.storage
-            //     .from("pictures")
-            //     .getPublicUrl("test.jpg");
+            const imageUrl = json.data.url;
 
-            // const url = publicUrlData?.publicUrl;
-            // if (!url) {
-            //     throw new Error("Fotoğraf URL alınamadı");
-            // }
-
-            // await setFieldValue("pictures", [url]);
+            await setFieldValue("pictures", [imageUrl]);
         } catch (error) {
             handleFetchError(error);
-        } finally {
-            setUploading(false);
         }
     }
 

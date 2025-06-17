@@ -3,10 +3,10 @@ import { ScrollView, Text, View } from "react-native";
 import { Appointment } from "../../interfaces/Appointment";
 import handleFetchError from "../../utils/handleFetchError";
 import axios from "axios";
-import LoadingScreen from "../global/LoadingScreen";
+import LoadingScreen from "./LoadingScreen";
 import Appointments from "../../components/Appointments";
 
-export default function AppointmentsScreen() {
+export default function AppointmentsScreen({isCustomer}: { isCustomer?: boolean }) {
     const [appointments, setAppointments] = useState<Appointment[] | null>(
         null
     );
@@ -24,11 +24,10 @@ export default function AppointmentsScreen() {
             }
         }
         fetchAppointments();
-
     }, []);
 
-    if(!appointments){
-        return <LoadingScreen/>;
+    if (!appointments) {
+        return <LoadingScreen />;
     }
 
     return (

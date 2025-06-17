@@ -7,6 +7,6 @@ export interface Customer {
     city: string;
     password: string;
     date: string;
-    favoriedBusinesses: string[];
+    favoriedBusinesses: string[]; //id[]
     accountType: "customer";
 }

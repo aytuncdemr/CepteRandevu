@@ -1,13 +1,15 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AccountScreen from "../screens/business/AccountScreen";
-import AppointmentsScreen from "../screens/business/AppointmentsScreen";
 import CommentsScreen from "../screens/business/CommentsScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
+    faBuilding,
+    faBusinessTime,
     faListSquares,
     faMessage,
     faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import AppointmentsScreen from "../screens/global/AppointmentsScreen";
 
 export type BusinessBottomTabParamList = {
     AppointmentsScreen: undefined;
@@ -38,6 +40,7 @@ export default function BusinessBottomBar() {
                             style={{ marginBottom: 2 }}
                         ></FontAwesomeIcon>
                     ),
+                    tabBarLabel: "Yorumlar",
                 }}
             />
             <Tab.Screen
@@ -49,9 +52,10 @@ export default function BusinessBottomBar() {
                             size={size}
                             color={color}
                             icon={faListSquares}
-                            style={{ marginBottom: 2 }}
+                            style={{ marginBottom: 4 }}
                         ></FontAwesomeIcon>
                     ),
+                    tabBarLabel: "Randevular",
                 }}
             />
             <Tab.Screen
@@ -62,10 +66,11 @@ export default function BusinessBottomBar() {
                         <FontAwesomeIcon
                             size={size}
                             color={color}
-                            icon={faUserCircle}
-                            style={{ marginBottom: 2 }}
+                            icon={faBuilding}
+                            style={{ marginBottom: 4 }}
                         ></FontAwesomeIcon>
                     ),
+                    tabBarLabel: "Hesabım",
                 }}
             />
         </Tab.Navigator>

@@ -50,7 +50,7 @@ export default function SignInForm() {
                 navigator.navigate("CustomerNavigation");
             }
             if (data.accountType === "business") {
-                navigator.navigate("BusinessScreens");
+                navigator.navigate("BusinessBottomBar");
             }
         } catch (error: any) {
             handleFetchError(error);

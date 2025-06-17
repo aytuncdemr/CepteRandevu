@@ -9,7 +9,7 @@ import CustomerNavigation from "./CustomerNavigation";
 export type RootStackParamList = {
     LoginScreen: undefined;
     CustomerNavigation: undefined;
-    BusinessScreens: undefined;
+    BusinessBottomBar: undefined;
     RegisterScreen: { isCustomer: boolean };
 };
 
@@ -44,7 +44,7 @@ export default function RootNavigation() {
                     ></Stack.Screen>
 
                     <Stack.Screen
-                        name="BusinessScreens"
+                        name="BusinessBottomBar"
                         component={BusinessBottomBar}
                     ></Stack.Screen>
                 </Stack.Navigator>

@@ -407,6 +407,11 @@ function BusinessRegisterForm({
                             alignSelf: "center",
                         }}
                     />
+                    {touched.category && errors.category && (
+                        <Text className="text-red-500 text-center">
+                            {errors.category}
+                        </Text>
+                    )}
                     <DropDownPicker
                         listMode="SCROLLVIEW"
                         open={cityOpen}

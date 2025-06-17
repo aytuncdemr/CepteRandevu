@@ -3,7 +3,7 @@ import ExploreScreen from "../screens/customer/ExploreScreen";
 import AccountScreen from "../screens/customer/AccountScreen";
 import NotificationsScreen from "../screens/customer/NotificationsScreen";
 import FavoritesScreen from "../screens/customer/FavoritesScreen";
-import AppointmentsScreen from "../screens/customer/AppointmentsScreen";
+import AppointmentsScreen from "../screens/global/AppointmentsScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
     faArrowLeft,
