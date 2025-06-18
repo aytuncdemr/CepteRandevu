@@ -2,14 +2,25 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Text, View } from "react-native";
 
-export default function Stars({ averageStar }: { averageStar: number }) {
+export default function Stars({
+    averageStar,
+    isHorizontal,
+    isComment,
+}: {
+    averageStar: number;
+    isHorizontal?: boolean;
+    isComment?:boolean;
+}) {
     const stars = [];
 
     for (let i = 0; i < 5; i++) {
         stars.push(
             <FontAwesomeIcon
                 style={{
-                    color: i + 1 > Math.floor(averageStar) ? "gray" : "#FFD700",
+                    color:
+                        i + 1 > Math.floor(averageStar)
+                            ? "gray"
+                            : "rgb(252, 131, 50)",
                 }}
                 icon={faStar}
                 key={i}
@@ -18,9 +29,9 @@ export default function Stars({ averageStar }: { averageStar: number }) {
     }
 
     return (
-        <View>
+        <View style={isHorizontal ? {flexDirection:"row",alignItems:"center",gap:6}:{}}>
             <View className="flex flex-row">{stars}</View>
-            <Text className="mt-2">{averageStar}</Text>
+           {!isComment && <Text style={isHorizontal ? {marginTop:4} : {marginTop:6}}>{averageStar}</Text>}
         </View>
     );
 }

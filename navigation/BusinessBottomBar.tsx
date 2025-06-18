@@ -45,7 +45,6 @@ export default function BusinessBottomBar() {
             />
             <Tab.Screen
                 name="AppointmentsScreen"
-                component={AppointmentsScreen}
                 options={{
                     tabBarIcon: ({ color, size, focused }) => (
                         <FontAwesomeIcon
@@ -53,11 +52,14 @@ export default function BusinessBottomBar() {
                             color={color}
                             icon={faListSquares}
                             style={{ marginBottom: 4 }}
-                        ></FontAwesomeIcon>
+                        />
                     ),
                     tabBarLabel: "Randevular",
                 }}
-            />
+            >
+                {() => <AppointmentsScreen isCustomer={false} />}
+            </Tab.Screen>
+
             <Tab.Screen
                 name="AccountScreen"
                 component={AccountScreen}

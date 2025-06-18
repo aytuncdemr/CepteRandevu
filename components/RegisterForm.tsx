@@ -252,7 +252,7 @@ function BusinessRegisterForm({
         favorites: Yup.number(),
         workDays: Yup.array().of(Yup.string()).required(),
         workHours: Yup.array().of(Yup.string()).required(),
-        serviceCategories: Yup.array().of(Yup.string()).required(),
+        services: Yup.array().of(Yup.string()).required(),
         workers: Yup.array().of(Yup.string()).required(),
     });
 
@@ -265,7 +265,7 @@ function BusinessRegisterForm({
         async function getCategories() {
             try {
                 const { data } = await axios.get(
-                    "http://10.0.2.2:3000/api/v1/business/categories"
+                    "http://127.0.0.1:3000/api/v1/business/categories"
                 );
                 setCategories(data);
             } catch (error) {
@@ -295,7 +295,7 @@ function BusinessRegisterForm({
                 favorites: 0,
                 workDays: [],
                 workHours: [],
-                serviceCategories: [],
+                services: [],
                 workers: [],
                 averageStar: 0,
             }}
@@ -393,7 +393,7 @@ function BusinessRegisterForm({
                             setFieldValue("category", selected);
                         }}
                         placeholder="Bir kategori seçiniz..."
-                        zIndex={1000}
+                        zIndex={3000}
                         containerStyle={{ width: "75%", alignSelf: "center" }}
                         style={{
                             borderWidth: 1,

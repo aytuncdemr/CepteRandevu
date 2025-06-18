@@ -9,6 +9,7 @@ import {
     faArrowLeft,
     faBell,
     faBookmark,
+    faChevronLeft,
     faHouse,
     faListSquares,
     faUserCircle,
@@ -17,13 +18,16 @@ import {
     createNativeStackNavigator,
     NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
-import { useNavigation } from "@react-navigation/native";
+import { NavigatorScreenParams, useNavigation } from "@react-navigation/native";
 import SearchScreen from "../screens/customer/SearchScreen";
 import { Pressable } from "react-native";
+import BusinessScreen from "../screens/customer/BusinessScreen";
+import { Business } from "../interfaces/Business";
+import GetAppointmentScreen from "../screens/customer/GetAppointmentScreen";
 
 export type CustomerRootStackParamList = {
     CustomerBottomTab: undefined;
-    CustomerStack: undefined;
+    CustomerStack: NavigatorScreenParams<CustomerStackParamList>;
 };
 
 const CustomerRootStack =
@@ -80,19 +84,20 @@ function CustomerBottomTab() {
             />
             <Tab.Screen
                 name="AppointmentsScreen"
-                component={AppointmentsScreen}
                 options={{
                     tabBarIcon: ({ color, size, focused }) => (
                         <FontAwesomeIcon
-                            icon={faListSquares}
                             size={size}
                             color={color}
+                            icon={faListSquares}
                             style={{ marginBottom: 4 }}
                         />
                     ),
-                    tabBarLabel: "Randevular",
+                    tabBarLabel: "Randevularım",
                 }}
-            />
+            >
+                {() => <AppointmentsScreen isCustomer={true} />}
+            </Tab.Screen>
             <Tab.Screen
                 name="ExploreScreen"
                 options={{
@@ -145,6 +150,8 @@ function CustomerBottomTab() {
 
 export type CustomerStackParamList = {
     SearchScreen: undefined;
+    BusinessScreen: { id: string; title: string };
+    GetAppointmentScreen: { business: Business };
 };
 
 const Stack = createNativeStackNavigator<CustomerStackParamList>();
@@ -176,6 +183,32 @@ function CustomerStack() {
                     ),
                 })}
             ></Stack.Screen>
+            <Stack.Screen
+                name="BusinessScreen"
+                component={BusinessScreen}
+                options={() => ({
+                    headerShown: true,
+                    headerTitle: "", // route.params.title
+                    headerLeft: () => (
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <FontAwesomeIcon icon={faChevronLeft} size={20} />
+                        </Pressable>
+                    ),
+                })}
+            ></Stack.Screen>
+            <Stack.Screen
+                name="GetAppointmentScreen"
+                component={GetAppointmentScreen}
+                options={{
+                    headerShown: true,
+                    headerTitle: "Randevu Al",
+                    headerLeft: () => (
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <FontAwesomeIcon icon={faChevronLeft} size={20} />
+                        </Pressable>
+                    ),
+                }}
+            />
         </Stack.Navigator>
     );
 }

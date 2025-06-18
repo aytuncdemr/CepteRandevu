@@ -12,7 +12,9 @@ export default function LoginScreen() {
             >
                 <View className="mb-16">
                     <Text
-                        className={"text-5xl text-center font-semibold mb-4 text-purple-700"}
+                        className={
+                            "text-5xl text-center font-semibold mb-4 text-purple-700"
+                        }
                     >
                         CepteRandevu
                     </Text>
@@ -23,7 +25,7 @@ export default function LoginScreen() {
 
                 <SignInForm></SignInForm>
             </View>
-            <View className="mt-auto mb-4">
+            <View className="mt-auto">
                 <Text className="text-center text-gray-400">
                     @2025 - CepteRandevu
                 </Text>

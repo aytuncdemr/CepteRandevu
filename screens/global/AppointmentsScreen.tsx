@@ -6,7 +6,11 @@ import axios from "axios";
 import LoadingScreen from "./LoadingScreen";
 import Appointments from "../../components/Appointments";
 
-export default function AppointmentsScreen({isCustomer}: { isCustomer?: boolean }) {
+export default function AppointmentsScreen({
+    isCustomer,
+}: {
+    isCustomer: boolean;
+}) {
     const [appointments, setAppointments] = useState<Appointment[] | null>(
         null
     );
@@ -35,11 +39,14 @@ export default function AppointmentsScreen({isCustomer}: { isCustomer?: boolean 
             <View>
                 <View className="px-4 py-12">
                     <Text className="big-heading text-purple-600">
-                        Randevularım
+                        {isCustomer ? "Randevularım" : "Randevular"}
                     </Text>
                 </View>
                 <View>
-                    <Appointments appointments={appointments}></Appointments>
+                    <Appointments
+                        isCustomer={isCustomer}
+                        appointments={appointments}
+                    ></Appointments>
                 </View>
             </View>
         </ScrollView>

@@ -1,4 +1,4 @@
-import { Business, ServiceCategory } from "../interfaces/Business";
+import { Business } from "../interfaces/Business";
 
 export default function businessQueryFilter(query: string, business: Business) {
     const words = query.split(" ");
@@ -21,15 +21,7 @@ function generateBusinessQuery(business: Business) {
         business.description +
         business.email +
         business.name +
-        business.serviceCategories
-            .map(
-                (serviceCategory: ServiceCategory) =>
-                    serviceCategory.title +
-                    serviceCategory.services
-                        .map((service) => service.name)
-                        .join("")
-            )
-            .join("")
+        business.services.join("")
     )
         .toLowerCase()
         .trim()

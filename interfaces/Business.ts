@@ -13,12 +13,8 @@ export interface Business {
     date: string;
     workDays: string[];
     workHours: string[];
-    serviceCategories: ServiceCategory[];
+    services: { title: string; price: number }[];
     workers: string[];
     averageStar: number;
     accountType: "business";
-}
-export interface ServiceCategory {
-    title: string;
-    services: { price: number; name: string }[];
 }

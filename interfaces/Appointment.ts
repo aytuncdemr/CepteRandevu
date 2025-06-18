@@ -4,4 +4,5 @@ export interface Appointment {
     business: string; //id
     service: { worker: string; name: string; price: number };
     date: string;
+    
 }

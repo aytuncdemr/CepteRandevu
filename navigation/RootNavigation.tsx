@@ -8,9 +8,9 @@ import CustomerNavigation from "./CustomerNavigation";
 
 export type RootStackParamList = {
     LoginScreen: undefined;
+    RegisterScreen: { isCustomer: boolean };
     CustomerNavigation: undefined;
     BusinessBottomBar: undefined;
-    RegisterScreen: { isCustomer: boolean };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -37,7 +37,6 @@ export default function RootNavigation() {
                         name="RegisterScreen"
                         component={RegisterScreen}
                     />
-
                     <Stack.Screen
                         name="CustomerNavigation"
                         component={CustomerNavigation}

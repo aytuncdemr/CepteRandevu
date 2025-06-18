@@ -16,7 +16,7 @@ export default function ImageUploader({
     ) => Promise<void | FormikErrors<any>>;
 }) {
     const [image, setImage] = useState<string | null>(null);
-
+    
     async function pickImage() {
         try {
             const { granted } =
@@ -46,8 +46,13 @@ export default function ImageUploader({
         }
     }
 
+    /**
+     * Uploads an image to ImgBB.
+     * @param {string} uri
+     */
     async function uploadImage(uri: string) {
         try {
+            // Read the image as a base64-encoded string
             const base64 = await FileSystem.readAsStringAsync(uri, {
                 encoding: FileSystem.EncodingType.Base64,
             });
@@ -91,3 +96,4 @@ export default function ImageUploader({
         </View>
     );
 }
+/*******  a1412ed8-b0f3-44ac-99b1-805723551983  *******/
