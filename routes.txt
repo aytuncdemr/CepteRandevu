@@ -9,7 +9,7 @@ GET /customers/:id
 PUT /customers/:id 
 
 GET /customers/:id/favorites
-POST /customers/:id/favorites
+POST /customers/:id/favorites/:id
 DELETE /customers/:id/favorites/:id
 
 GET /businesses
