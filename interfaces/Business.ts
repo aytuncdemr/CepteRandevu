@@ -4,7 +4,7 @@ export interface Business {
     phone: string;
     email: string;
     password: string;
-    pictures: string[];
+    picture: string;
     favorites: number;
     category: string;
     city: string;

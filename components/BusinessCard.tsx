@@ -14,22 +14,20 @@ import { CustomerStackParamList } from "../navigation/CustomerNavigation";
 import { useNavigation } from "@react-navigation/native";
 
 export default function BusinessCard({ business }: { business: Business }) {
-    // IMPORTANT: Change this to use CustomerStackParamList directly
     const navigation =
-        useNavigation<NativeStackNavigationProp<CustomerStackParamList>>(); // <--- CHANGE THIS LINE
+        useNavigation<NativeStackNavigationProp<CustomerStackParamList>>();
 
     return (
-        <View>
+        <View className="flex flex-col gap-2">
             <View>
                 <Image
                     className="w-full h-64 "
-                    source={{ uri: business.pictures[0] }}
+                    source={{ uri: business.picture }}
                 ></Image>
                 <Pressable
                     onPress={() => {
-                        // Navigate directly to GetAppointmentScreen, as both are in CustomerStack
                         navigation.push("GetAppointmentScreen", {
-                            business: business, // Pass the entire business object
+                            business: business,
                         });
                     }}
                 >

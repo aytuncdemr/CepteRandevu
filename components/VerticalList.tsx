@@ -5,7 +5,11 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { CustomerRootStackParamList } from "../navigation/CustomerNavigation";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faSquareXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+    faBookmark,
+    faHeart,
+    faSquareXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import handleFetchError from "../utils/handleFetchError";
 import { API_URL } from "../data/API_URL";
 import { useContext } from "react";
@@ -71,7 +75,7 @@ export default function VerticalList({
                     >
                         <View className="flex flex-row gap-4">
                             <Image
-                                source={{ uri: business.pictures[0] }}
+                                source={{ uri: business.picture }}
                                 className="w-[165] h-[100] rounded-lg"
                             />
                             <View className="py-2 ">
@@ -98,7 +102,7 @@ export default function VerticalList({
                                             <FontAwesomeIcon
                                                 color="red"
                                                 size={21}
-                                                icon={faSquareXmark}
+                                                icon={faHeart}
                                             ></FontAwesomeIcon>
                                         </View>
                                     </Pressable>

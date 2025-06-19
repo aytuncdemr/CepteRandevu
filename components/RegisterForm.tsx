@@ -27,7 +27,7 @@ export default function RegisterForm({ isCustomer }: { isCustomer: boolean }) {
         try {
             if (
                 account.accountType === "business" &&
-                account.pictures.length === 0
+                account.picture === ""
             ) {
                 throw new Error("Lütfen 1 adet fotoğraf yükleyiniz");
             }
@@ -262,7 +262,7 @@ function BusinessRegisterForm({
         date: Yup.string(),
         averageStar: Yup.number(),
         city: Yup.string().required("Şehir zorunludur"),
-        pictures: Yup.array().of(Yup.string()).required(),
+        picture: Yup.string().required(),
         category: Yup.string().required("Kategori zorunludur"),
         description: Yup.string().required("Açıklama zorunludur"),
         address: Yup.string().required("Adres zorunludur"),
@@ -316,7 +316,7 @@ function BusinessRegisterForm({
                     password: "",
                     city: "",
                     date: getTodayDate(),
-                    pictures: [],
+                    picture: "",
                     category: "",
                     description: "",
                     address: "",
@@ -484,9 +484,9 @@ function BusinessRegisterForm({
                         <ImageUploader
                             setFieldValue={setFieldValue}
                         ></ImageUploader>
-                        {touched.pictures && errors.pictures && (
+                        {touched.picture && errors.picture && (
                             <Text className="text-red-500 text-center">
-                                {errors.pictures}
+                                {errors.picture}
                             </Text>
                         )}
 

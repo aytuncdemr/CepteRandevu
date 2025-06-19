@@ -35,7 +35,7 @@ export default function HorizontalList({
                     >
                         <View className="mr-4 max-w-[185px]">
                             <Image
-                                source={{ uri: business.pictures[0] }}
+                                source={{ uri: business.picture }}
                                 style={{
                                     width: 180,
                                     height: 100,

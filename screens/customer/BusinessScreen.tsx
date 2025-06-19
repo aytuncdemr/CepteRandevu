@@ -1,5 +1,5 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { Image, ScrollView, Text, View } from "react-native";
+import { ScrollView } from "react-native";
 import { CustomerStackParamList } from "../../navigation/CustomerNavigation";
 import { useEffect, useState } from "react";
 import { Business } from "../../interfaces/Business";
@@ -7,6 +7,7 @@ import LoadingScreen from "../global/LoadingScreen";
 import handleFetchError from "../../utils/handleFetchError";
 import axios from "axios";
 import BusinessCard from "../../components/BusinessCard";
+import { API_URL } from "../../data/API_URL";
 
 export default function BusinessScreen() {
     const route =
@@ -18,9 +19,7 @@ export default function BusinessScreen() {
     useEffect(() => {
         async function fetchBusiness() {
             try {
-                const { data } = await axios.get(
-                    `http://127.0.0.1:3000/api/v1/businesses/${id}`
-                );
+                const { data } = await axios.get(API_URL + `/businesses/${id}`);
 
                 setBusiness(data);
             } catch (error) {
