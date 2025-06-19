@@ -6,6 +6,7 @@ import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 import LoadingScreen from "../global/LoadingScreen";
 import VerticalList from "../../components/VerticalList";
+import { API_URL } from "../../data/API_URL";
 
 export default function FavoritesScreen() {
     const authContext = useContext(AuthContext);
@@ -15,7 +16,7 @@ export default function FavoritesScreen() {
         async function fetchFavoriteBusinesses() {
             try {
                 const { data } = await axios.get(
-                    `http://127.0.0.1:3000/api/v1/businesses`
+                    API_URL + `/customers/${authContext?.id}/favorites`
                 );
                 setBusinesses(data as Business[]);
             } catch (error) {
@@ -32,10 +33,19 @@ export default function FavoritesScreen() {
     return (
         <ScrollView className="flex-1 py-12 px-4">
             <View className="mb-6 ">
-                <Text className="big-heading text-purple-600">Favoriler</Text>
+                <Text className="big-heading text-violet-600">Favoriler</Text>
             </View>
             <View className="mb-4">
-                <VerticalList businesses={businesses}></VerticalList>
+                <View className="mb-1">
+                    <Text className="text-2xl mt-4 text-violet-600">
+                        Favori işletmelerim
+                    </Text>
+                </View>
+                <VerticalList
+                    isFavorites
+                    setBusinesses={setBusinesses}
+                    businesses={businesses}
+                ></VerticalList>
             </View>
         </ScrollView>
     );

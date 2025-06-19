@@ -8,7 +8,9 @@ export default function AccountScreen() {
             contentContainerStyle={{ flexGrow: 1 }}
         >
             <View>
-                <Text className="text-center text-4xl ">Hesabım</Text>
+                <Text className="text-center text-4xl font-semibold text-violet-700">
+                    Hesabım
+                </Text>
             </View>
             <View className="flex-1">
                 <AccountInformation></AccountInformation>

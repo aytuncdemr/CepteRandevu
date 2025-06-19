@@ -10,6 +10,7 @@ PUT /customers/:id
 
 GET /customers/:id/favorites
 POST /customers/:id/favorites
+DELETE /customers/:id/favorites/:id
 
 GET /businesses
 GET /businesses/:id

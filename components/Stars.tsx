@@ -9,7 +9,7 @@ export default function Stars({
 }: {
     averageStar: number;
     isHorizontal?: boolean;
-    isComment?:boolean;
+    isComment?: boolean;
 }) {
     const stars = [];
 
@@ -29,9 +29,21 @@ export default function Stars({
     }
 
     return (
-        <View style={isHorizontal ? {flexDirection:"row",alignItems:"center",gap:6}:{}}>
+        <View
+            style={
+                isHorizontal
+                    ? { flexDirection: "row", alignItems: "center", gap: 6 }
+                    : {}
+            }
+        >
             <View className="flex flex-row">{stars}</View>
-           {!isComment && <Text style={isHorizontal ? {marginTop:4} : {marginTop:6}}>{averageStar}</Text>}
+            {!isComment && (
+                <Text
+                    style={isHorizontal ? { marginTop: 4 } : { marginTop: 6 }}
+                >
+                    ({averageStar})
+                </Text>
+            )}
         </View>
     );
 }

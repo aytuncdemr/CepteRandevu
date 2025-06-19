@@ -16,13 +16,13 @@ export default function SearchBar({
     const navigator =
         useNavigation<NavigationProp<CustomerRootStackParamList>>();
 
-  
-
     return (
         <Pressable
             onPress={() => {
                 if (!isSearching) {
-                    navigator.navigate("CustomerStack");
+                    navigator.navigate("CustomerStack", {
+                        screen: "SearchScreen",
+                    });
                 }
             }}
         >
@@ -47,6 +47,7 @@ export default function SearchBar({
                                 )(e)
                             }
                             placeholder="Ara"
+                            autoCapitalize="none"
                         ></TextInput>
                     )}
                 </View>

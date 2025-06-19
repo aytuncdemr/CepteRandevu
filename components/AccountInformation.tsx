@@ -1,6 +1,13 @@
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { Pressable, Text, TextInput, View, ScrollView } from "react-native";
+import {
+    Pressable,
+    Text,
+    TextInput,
+    View,
+    ScrollView,
+    ActivityIndicator,
+} from "react-native";
 import axios from "axios";
 import { Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
@@ -12,31 +19,34 @@ import handleFetchError from "../utils/handleFetchError";
 import DropDownPicker from "react-native-dropdown-picker";
 import { cities } from "../data/cities";
 import Toast from "react-native-toast-message";
-
-const validationSchema = Yup.object().shape({
-    name: Yup.string().required("İsim zorunludur"),
-    surname: Yup.string().required("Soyisim zorunludur"),
-    email: Yup.string()
-        .email("Geçersiz e-posta")
-        .required("E-posta zorunludur"),
-    password: Yup.string().min(6, "Şifre en az 6 karakter olmalı"),
-    phone: Yup.string().required("Telefon zorunludur"),
-    city: Yup.string().required("Şehir zorunludur"),
-    date: Yup.string().required("date"),
-    accountType: Yup.string().required("accountType"),
-    favoriedBusinesses: Yup.array().of(Yup.string()),
-});
+import { API_URL } from "../data/API_URL";
 
 export default function AccountInformation() {
     const authContext = useContext(AuthContext);
     const [customer, setCustomer] = useState<Customer | null>(null);
     const [open, setOpen] = useState(false);
 
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().required("İsim zorunludur"),
+        surname: Yup.string().required("Soyisim zorunludur"),
+        email: Yup.string()
+            .email("Geçersiz e-posta")
+            .required("E-posta zorunludur"),
+        password: Yup.string().min(6, "Şifre en az 6 karakter olmalı"),
+        phone: Yup.string()
+            .required("Telefon zorunludur")
+            .length(11, "Numara 11 haneli olmalı"),
+        city: Yup.string().required("Şehir zorunludur"),
+        date: Yup.string().required("date"),
+        accountType: Yup.string().required("accountType"),
+        favoriedBusinesses: Yup.array().of(Yup.string()),
+    });
+
     useEffect(() => {
         async function fetchCustomer() {
             try {
                 const { data } = await axios.get(
-                    `http://127.0.0.1:3000/api/v1/customers/${authContext?.id}`
+                    API_URL + `/customers/${authContext?.id}`
                 );
                 setCustomer(data as Customer);
             } catch (error) {
@@ -52,10 +62,12 @@ export default function AccountInformation() {
         actions: FormikHelpers<Customer>
     ) {
         try {
-            const { data } = await axios.put<{ message: string }>(
-                `http://127.0.0.1:3000/api/v1/customers/${authContext?.id}`,
+            const { data } = await axios.put(
+                API_URL + `/customers/${authContext?.id}`,
                 values
             );
+            Toast.hide();
+
             Toast.show({
                 type: "success",
                 text1: "Başarılı",
@@ -76,7 +88,7 @@ export default function AccountInformation() {
             <View className="mb-6">
                 <View className="flex items-center">
                     <FontAwesomeIcon
-                        size={108}
+                        size={72}
                         color="#aaa"
                         icon={faUserCircle}
                     />
@@ -202,8 +214,8 @@ export default function AccountInformation() {
                                     const selected = callback(values.city);
                                     setFieldValue("city", selected);
                                 }}
-                                placeholder="Bir şehir seçiniz..."
-                                zIndex={1000}
+                                placeholder="Seçiniz"
+                                zIndex={4000}
                                 containerStyle={{
                                     width: "100%",
                                     alignSelf: "center",
@@ -219,35 +231,41 @@ export default function AccountInformation() {
                                     borderColor: "#ddd",
                                 }}
                             />
-                        </View>
-
-                        <View>
-                            <Text className="text-lg text-gray-400 ">
-                                Kayıt Tarihi
-                            </Text>
-                            <TextInput
-                                className="text-input !text-gray-600"
-                                value={values.date}
-                                onChangeText={handleChange("surname")}
-                                onBlur={handleBlur("surname")}
-                            />
-                            {touched.surname && errors.surname && (
+                            {touched.city && errors.city && (
                                 <Text className="text-red-500 text-sm mt-1">
-                                    {errors.surname}
+                                    {errors.city}
                                 </Text>
                             )}
                         </View>
 
+                        <View className="mb-8">
+                            <Text className="text-lg text-gray-400 ">
+                                Üyelik Tarihi
+                            </Text>
+                            <View className="text-input">
+                                <Text className=" text-gray-400 mt-1">
+                                    {values.date}
+                                </Text>
+                            </View>
+                        </View>
+
                         <Pressable
-                            onPress={handleSubmit as () => void}
                             disabled={isSubmitting}
+                            onPress={() => handleSubmit()}
                         >
                             <View className="button-outer">
-                                <Text className="button-text">
-                                    {isSubmitting
-                                        ? "Kaydediliyor..."
-                                        : "Kaydet"}
-                                </Text>
+                                <View className="button-text h-[25px]">
+                                    {isSubmitting ? (
+                                        <ActivityIndicator
+                                            size="small"
+                                            color="#fff"
+                                        />
+                                    ) : (
+                                        <Text className="button-text">
+                                            Kaydet
+                                        </Text>
+                                    )}
+                                </View>
                             </View>
                         </Pressable>
                     </View>

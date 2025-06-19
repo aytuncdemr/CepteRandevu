@@ -10,12 +10,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Comments from "./Comments";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { CustomerRootStackParamList } from "../navigation/CustomerNavigation";
+import { CustomerStackParamList } from "../navigation/CustomerNavigation";
 import { useNavigation } from "@react-navigation/native";
 
 export default function BusinessCard({ business }: { business: Business }) {
+    // IMPORTANT: Change this to use CustomerStackParamList directly
     const navigation =
-        useNavigation<NativeStackNavigationProp<CustomerRootStackParamList>>();
+        useNavigation<NativeStackNavigationProp<CustomerStackParamList>>(); // <--- CHANGE THIS LINE
+
     return (
         <View>
             <View>
@@ -25,11 +27,9 @@ export default function BusinessCard({ business }: { business: Business }) {
                 ></Image>
                 <Pressable
                     onPress={() => {
-                        navigation.navigate("CustomerStack", {
-                            screen: "GetAppointmentScreen",
-                            params: {
-                                business,
-                            },
+                        // Navigate directly to GetAppointmentScreen, as both are in CustomerStack
+                        navigation.push("GetAppointmentScreen", {
+                            business: business, // Pass the entire business object
                         });
                     }}
                 >

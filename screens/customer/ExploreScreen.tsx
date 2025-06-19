@@ -7,6 +7,7 @@ import axios from "axios";
 import LoadingScreen from "../global/LoadingScreen";
 import HorizontalList from "../../components/HorizontalList";
 import VerticalList from "../../components/VerticalList";
+import { API_URL } from "../../data/API_URL";
 
 export default function ExploreScreen() {
     const [businesses, setBusinesses] = useState<Business[] | null>(null);
@@ -14,9 +15,7 @@ export default function ExploreScreen() {
     useEffect(() => {
         async function fetchBusinesses() {
             try {
-                const { data } = await axios.get(
-                    "http://127.0.0.1:3000/api/v1/businesses"
-                );
+                const { data } = await axios.get(API_URL + "/businesses");
 
                 setBusinesses(data);
             } catch (error) {
@@ -32,11 +31,14 @@ export default function ExploreScreen() {
     }
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} className="flex-1 py-12 px-4">
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            className="flex-1 py-12 px-4"
+        >
             <View>
                 <Text
                     className={
-                        "text-5xl text-center font-semibold mb-3 text-purple-700"
+                        "text-5xl text-center font-semibold mb-3 text-violet-700"
                     }
                 >
                     CepteRandevu
@@ -48,9 +50,19 @@ export default function ExploreScreen() {
             <View className="p-6">
                 <SearchBar isSearching={false}></SearchBar>
                 <View className="my-4">
+                    <View className="mb-4">
+                        <Text className="text-2xl text-violet-600">
+                            En çok ziyaret edilenler
+                        </Text>
+                    </View>
                     <HorizontalList businesses={businesses}></HorizontalList>
                 </View>
                 <View>
+                    <View className="mb-2">
+                        <Text className="text-2xl text-violet-600">
+                            Yakınımdakiler
+                        </Text>
+                    </View>
                     <VerticalList businesses={businesses}></VerticalList>
                 </View>
             </View>

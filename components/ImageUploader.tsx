@@ -23,6 +23,8 @@ export default function ImageUploader({
                 await ImagePicker.requestMediaLibraryPermissionsAsync();
 
             if (!granted) {
+                    Toast.hide();
+
                 Toast.show({
                     type: "error",
                     text1: "Hata",

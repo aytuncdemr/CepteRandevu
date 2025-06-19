@@ -15,11 +15,6 @@ export default function HorizontalList({
 
     return (
         <>
-            <View className="mb-4">
-                <Text className="text-2xl text-purple-600">
-                    Popüler işletmeler
-                </Text>
-            </View>
             <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -36,22 +31,24 @@ export default function HorizontalList({
                                     title: business.name,
                                 },
                             });
-                            
                         }}
                     >
-                        <View className="mr-4 max-w-[132px]">
+                        <View className="mr-4 max-w-[185px]">
                             <Image
                                 source={{ uri: business.pictures[0] }}
                                 style={{
-                                    width: 124,
+                                    width: 180,
                                     height: 100,
-                                    borderRadius: 12,
+                                    borderRadius: 10,
                                 }}
                             />
-                            <Text className="mt-2 font-semibold">
+                            <Text className="mt-2 text-lg font-semibold">
                                 {business.name}
                             </Text>
-                            <Stars averageStar={business.averageStar}></Stars>
+                            <Stars
+                                isHorizontal
+                                averageStar={business.averageStar}
+                            ></Stars>
                         </View>
                     </Pressable>
                 ))}

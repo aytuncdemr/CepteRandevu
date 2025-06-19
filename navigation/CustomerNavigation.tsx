@@ -6,12 +6,11 @@ import FavoritesScreen from "../screens/customer/FavoritesScreen";
 import AppointmentsScreen from "../screens/global/AppointmentsScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
-    faArrowLeft,
     faBell,
     faBookmark,
+    faCalendarCheck,
     faChevronLeft,
     faHouse,
-    faListSquares,
     faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -62,19 +61,19 @@ function CustomerBottomTab() {
     return (
         <Tab.Navigator
             screenOptions={{
-                tabBarActiveTintColor: "rgb(168, 85, 247)",
+                tabBarActiveTintColor: "#7e22ce",
                 headerShown: false,
             }}
             initialRouteName="ExploreScreen"
         >
             <Tab.Screen
                 options={{
-                    tabBarIcon: ({ color, size, focused }) => (
+                    tabBarIcon: ({ color, size }) => (
                         <FontAwesomeIcon
                             icon={faBookmark}
                             size={size}
                             color={color}
-                            style={{ marginBottom: 4 }}
+                            style={{ marginBottom: 6 }}
                         />
                     ),
                     tabBarLabel: "Favoriler",
@@ -85,15 +84,15 @@ function CustomerBottomTab() {
             <Tab.Screen
                 name="AppointmentsScreen"
                 options={{
-                    tabBarIcon: ({ color, size, focused }) => (
+                    tabBarIcon: ({ color, size }) => (
                         <FontAwesomeIcon
                             size={size}
                             color={color}
-                            icon={faListSquares}
-                            style={{ marginBottom: 4 }}
+                            icon={faCalendarCheck}
+                            style={{ marginBottom: 6 }}
                         />
                     ),
-                    tabBarLabel: "Randevularım",
+                    tabBarLabel: "Randevular",
                 }}
             >
                 {() => <AppointmentsScreen isCustomer={true} />}
@@ -101,12 +100,12 @@ function CustomerBottomTab() {
             <Tab.Screen
                 name="ExploreScreen"
                 options={{
-                    tabBarIcon: ({ color, size, focused }) => (
+                    tabBarIcon: ({ color, size }) => (
                         <FontAwesomeIcon
                             icon={faHouse}
                             size={size}
                             color={color}
-                            style={{ marginBottom: 4 }}
+                            style={{ marginBottom: 6 }}
                         />
                     ),
                     tabBarLabel: "Keşfet",
@@ -118,12 +117,12 @@ function CustomerBottomTab() {
                 name="NotificationsScreen"
                 component={NotificationsScreen}
                 options={{
-                    tabBarIcon: ({ color, size, focused }) => (
+                    tabBarIcon: ({ color, size }) => (
                         <FontAwesomeIcon
                             icon={faBell}
                             size={size}
                             color={color}
-                            style={{ marginBottom: 4 }}
+                            style={{ marginBottom: 6 }}
                         />
                     ),
                     tabBarLabel: "Bildirimler",
@@ -132,12 +131,12 @@ function CustomerBottomTab() {
             <Tab.Screen
                 name="AccountScreen"
                 options={{
-                    tabBarIcon: ({ color, size, focused }) => (
+                    tabBarIcon: ({ color, size }) => (
                         <FontAwesomeIcon
                             icon={faUserCircle}
                             size={size}
                             color={color}
-                            style={{ marginBottom: 4 }}
+                            style={{ marginBottom: 6 }}
                         />
                     ),
                     tabBarLabel: "Hesabım",
@@ -175,9 +174,8 @@ function CustomerStack() {
                             }
                         >
                             <FontAwesomeIcon
-                                icon={faArrowLeft}
-                                size={14}
-                                style={{ marginLeft: 15 }}
+                                icon={faChevronLeft}
+                                size={21}
                             />
                         </Pressable>
                     ),
@@ -188,10 +186,14 @@ function CustomerStack() {
                 component={BusinessScreen}
                 options={() => ({
                     headerShown: true,
-                    headerTitle: "", // route.params.title
+                    headerTitle: "",
                     headerLeft: () => (
-                        <Pressable onPress={() => navigation.goBack()}>
-                            <FontAwesomeIcon icon={faChevronLeft} size={20} />
+                        <Pressable
+                            onPress={() => {
+                                navigation.goBack();
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faChevronLeft} size={21} />
                         </Pressable>
                     ),
                 })}
@@ -204,7 +206,7 @@ function CustomerStack() {
                     headerTitle: "Randevu Al",
                     headerLeft: () => (
                         <Pressable onPress={() => navigation.goBack()}>
-                            <FontAwesomeIcon icon={faChevronLeft} size={20} />
+                            <FontAwesomeIcon icon={faChevronLeft} size={21} />
                         </Pressable>
                     ),
                 }}

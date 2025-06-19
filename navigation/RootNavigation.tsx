@@ -3,8 +3,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/global/LoginScreen";
 import RegisterScreen from "../screens/global/RegisterScreen";
 import BusinessBottomBar from "./BusinessBottomBar";
-import { SafeAreaView } from "react-native";
+import { Pressable, SafeAreaView, Text } from "react-native";
 import CustomerNavigation from "./CustomerNavigation";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import {
+    faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 export type RootStackParamList = {
     LoginScreen: undefined;
@@ -36,7 +40,21 @@ export default function RootNavigation() {
                     <Stack.Screen
                         name="RegisterScreen"
                         component={RegisterScreen}
+                        options={({ navigation }) => ({
+                            headerShown: true,
+                            title: "Kayıt ol",
+                            headerLeft: () => (
+                                <Pressable onPress={() => navigation.goBack()}>
+                                    <FontAwesomeIcon
+                                        icon={faChevronLeft}
+                                        size={21}
+                                        style={{ marginLeft: 15 }}
+                                    />
+                                </Pressable>
+                            ),
+                        })}
                     />
+
                     <Stack.Screen
                         name="CustomerNavigation"
                         component={CustomerNavigation}
