@@ -18,7 +18,7 @@ export default function FavoritesScreen() {
                 const { data } = await axios.get(
                     API_URL + `/customers/${authContext?.id}/favorites`
                 );
-                setBusinesses(data as Business[]);
+                setBusinesses(data);
             } catch (error) {
                 handleFetchError(error);
             }
@@ -38,7 +38,7 @@ export default function FavoritesScreen() {
             <View className="mb-4">
                 <View className="mb-1">
                     <Text className="text-2xl mt-4 text-violet-600">
-                        Favori işletmelerim
+                        Favori işletmeler
                     </Text>
                 </View>
                 <VerticalList

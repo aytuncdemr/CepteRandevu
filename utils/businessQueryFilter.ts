@@ -1,7 +1,7 @@
 import { Business } from "../interfaces/Business";
 
 export default function businessQueryFilter(query: string, business: Business) {
-    const words = query.split(" ");
+    const words = query.trim().split(" ");
     const businessQuery = generateBusinessQuery(business);
 
     for (const word of words) {
@@ -21,7 +21,9 @@ function generateBusinessQuery(business: Business) {
         business.description +
         business.email +
         business.name +
-        business.services.join("")
+        business.services.reduce((acc, service: { title: string }) => {
+            return acc + service.title;
+        }, "")
     )
         .toLowerCase()
         .trim()

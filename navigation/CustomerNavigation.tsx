@@ -19,10 +19,13 @@ import {
 } from "@react-navigation/native-stack";
 import { NavigatorScreenParams, useNavigation } from "@react-navigation/native";
 import SearchScreen from "../screens/customer/SearchScreen";
-import { Pressable } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import BusinessScreen from "../screens/customer/BusinessScreen";
 import { Business } from "../interfaces/Business";
 import GetAppointmentScreen from "../screens/customer/GetAppointmentScreen";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { RootStackParamList } from "./RootNavigation";
 
 export type CustomerRootStackParamList = {
     CustomerBottomTab: undefined;
@@ -58,6 +61,9 @@ export type CustomerBottomTabParamList = {
 const Tab = createBottomTabNavigator<CustomerBottomTabParamList>();
 
 function CustomerBottomTab() {
+    const authContext = useContext(AuthContext);
+    const navigator =
+        useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     return (
         <Tab.Navigator
             screenOptions={{
@@ -130,7 +136,16 @@ function CustomerBottomTab() {
             />
             <Tab.Screen
                 name="AccountScreen"
+                component={AccountScreen}
                 options={{
+                    headerShown: true,
+                    headerTitle: "",
+                    headerShadowVisible: false,
+                    headerStyle: {
+                        elevation: 0,
+                        shadowOpacity: 0,
+                        borderBottomWidth: 0,
+                    },
                     tabBarIcon: ({ color, size }) => (
                         <FontAwesomeIcon
                             icon={faUserCircle}
@@ -139,9 +154,22 @@ function CustomerBottomTab() {
                             style={{ marginBottom: 6 }}
                         />
                     ),
+                    headerRight: () => (
+                        <Pressable
+                            onPress={() => {
+                                authContext?.setId(null);
+                                navigator.navigate("LoginScreen");
+                            }}
+                        >
+                            <View style={{ marginRight: 12 }}>
+                                <Text className="text-red-500 text-xl font-semibold">
+                                    Çıkış yap
+                                </Text>
+                            </View>
+                        </Pressable>
+                    ),
                     tabBarLabel: "Hesabım",
                 }}
-                component={AccountScreen}
             />
         </Tab.Navigator>
     );
@@ -168,15 +196,8 @@ function CustomerStack() {
                     headerShown: true,
                     headerTitle: "Arama yap",
                     headerLeft: () => (
-                        <Pressable
-                            onPress={() =>
-                                navigation.navigate("CustomerBottomTab")
-                            }
-                        >
-                            <FontAwesomeIcon
-                                icon={faChevronLeft}
-                                size={21}
-                            />
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <FontAwesomeIcon icon={faChevronLeft} size={21} />
                         </Pressable>
                     ),
                 })}

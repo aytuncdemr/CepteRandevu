@@ -20,7 +20,7 @@ export default function Stars({
                     color:
                         i + 1 > Math.floor(averageStar)
                             ? "gray"
-                            : "rgb(252, 131, 50)",
+                            : "#FFC107",
                 }}
                 icon={faStar}
                 key={i}
@@ -39,6 +39,7 @@ export default function Stars({
             <View className="flex flex-row">{stars}</View>
             {!isComment && (
                 <Text
+                    className="text-gray-600"
                     style={isHorizontal ? { marginTop: 4 } : { marginTop: 6 }}
                 >
                     ({averageStar})

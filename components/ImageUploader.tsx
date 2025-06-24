@@ -75,7 +75,7 @@ export default function ImageUploader({
             }
 
             const imageUrl = json.data.url;
-
+            
             await setFieldValue("picture", imageUrl);
         } catch (error) {
             handleFetchError(error);

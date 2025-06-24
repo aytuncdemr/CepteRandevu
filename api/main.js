@@ -383,22 +383,460 @@ const businesses = [
     },
 ];
 
+const appointments = [
+    {
+        id: "1",
+        customer: "Ahmet Yılmaz",
+        business: "Berber Salonu Deluxe",
+        category: "Berber",
+        service: { worker: "Mert Can", title: "Sakal Tıraşı", price: 80 },
+        date: "12/05/2025 09:00",
+    },
+    {
+        id: "2",
+        customer: "Elif Demir",
+        business: "Diş Kliniği Gülüş",
+        category: "Diş Hekimi",
+        service: {
+            worker: "Dr. Ayça Turan",
+            title: "Diş Temizliği",
+            price: 300,
+        },
+        date: "13/05/2025 11:30",
+    },
+    {
+        id: "3",
+        customer: "Mehmet Koç",
+        business: "PsikoTerapi Merkezi",
+        category: "Psikolog",
+        service: { worker: "Uz. Psk. Ebru Yılmaz", title: "Seans", price: 500 },
+        date: "14/05/2025 15:00",
+    },
+    {
+        id: "4",
+        customer: "Fatma Özkan",
+        business: "Veteriner Pati Dostu",
+        category: "Veteriner",
+        service: {
+            worker: "Dr. Ahmet Kılıç",
+            title: "Aşı Uygulaması",
+            price: 200,
+        },
+        date: "15/05/2025 13:45",
+    },
+    {
+        id: "5",
+        customer: "Burak Aydın",
+        business: "Emlak Ofisi Elite",
+        category: "Emlak Danışmanı",
+        service: {
+            worker: "Selin Baş",
+            title: "Kiralık Daire Gezisi",
+            price: 0,
+        },
+        date: "16/05/2025 10:00",
+    },
+    {
+        id: "6",
+        customer: "Zeynep Kurt",
+        business: "Müzik Atölyesi Nota",
+        category: "Müzik Öğretmeni",
+        service: { worker: "Barış Aksoy", title: "Gitar Dersi", price: 150 },
+        date: "17/05/2025 17:30",
+    },
+    {
+        id: "7",
+        customer: "Emre Sarı",
+        business: "PT Akademi",
+        category: "Kişisel Antrenör",
+        service: {
+            worker: "Ali Kılıç",
+            title: "Kişisel Antrenman",
+            price: 250,
+        },
+        date: "18/05/2025 08:00",
+    },
+    {
+        id: "8",
+        customer: "Selin Aksoy",
+        business: "Fizyoterapi Gelişim",
+        category: "Fizyoterapist",
+        service: { worker: "Esra Demir", title: "Rehabilitasyon", price: 400 },
+        date: "19/05/2025 16:00",
+    },
+    {
+        id: "9",
+        customer: "Mustafa Arslan",
+        business: "Yoga Stüdyosu Lotus",
+        category: "Yoga Eğitmeni",
+        service: { worker: "Melisa Çetin", title: "Grup Yogası", price: 120 },
+        date: "20/05/2025 18:00",
+    },
+    {
+        id: "10",
+        customer: "Deniz Çelik",
+        business: "Düğün Organizasyon Efsane",
+        category: "Organizasyon Firması",
+        service: {
+            worker: "Buse Yıldız",
+            title: "Düğün Planlama",
+            price: 2000,
+        },
+        date: "21/05/2025 14:00",
+    },
+    {
+        id: "11",
+        customer: "Ayşe Kara",
+        business: "Çocuk Anaokulu Bal Arısı",
+        category: "Kreş / Anaokulu",
+        service: {
+            worker: "Öğr. Selda Kaplan",
+            title: "Tanıtım Günü",
+            price: 0,
+        },
+        date: "22/05/2025 10:30",
+    },
+    {
+        id: "12",
+        customer: "Can Yıldız",
+        business: "Fotoğrafçı LensArt",
+        category: "Fotoğrafçı",
+        service: { worker: "Tuna Arda", title: "Mezuniyet Çekimi", price: 750 },
+        date: "23/05/2025 13:00",
+    },
+    {
+        id: "13",
+        customer: "Merve Şahin",
+        business: "Araba Servisi OtoMax",
+        category: "Araba Servisi",
+        service: { worker: "Usta Cemil", title: "Yağ Değişimi", price: 300 },
+        date: "24/05/2025 09:30",
+    },
+    {
+        id: "14",
+        customer: "Kerem Toprak",
+        business: "Ev Temizlik Hizmeti Mis Gibi",
+        category: "Ev Temizlik Hizmeti",
+        service: { worker: "Fatma Ay", title: "Detaylı Temizlik", price: 500 },
+        date: "25/05/2025 08:00",
+    },
+    {
+        id: "15",
+        customer: "Gülcan Özdemir",
+        business: "Avukatlık Bürosu Adalet",
+        category: "Avukat",
+        service: {
+            worker: "Av. Mert Genç",
+            title: "Dava Danışmanlığı",
+            price: 600,
+        },
+        date: "26/05/2025 12:00",
+    },
+    {
+        id: "16",
+        customer: "Tuna Akın",
+        business: "Boyacı Usta Kemal",
+        category: "Boyacı / Usta",
+        service: { worker: "Kemal Usta", title: "Oda Boyama", price: 900 },
+        date: "27/05/2025 11:00",
+    },
+    {
+        id: "17",
+        customer: "Ceyda Güneş",
+        business: "Danışmanlık Vizyon",
+        category: "Danışmanlık Hizmeti",
+        service: {
+            worker: "Dr. Gökhan Aydın",
+            title: "İş Danışmanlığı",
+            price: 700,
+        },
+        date: "28/05/2025 15:45",
+    },
+    {
+        id: "18",
+        customer: "Engin Albayrak",
+        business: "Bilgisayar Servisi TeknoFix",
+        category: "Bilgisayar / Telefon Servisi",
+        service: { worker: "Ali Yazıcı", title: "SSD Montajı", price: 250 },
+        date: "29/05/2025 14:30",
+    },
+    {
+        id: "19",
+        customer: "İpek Turgut",
+        business: "Moda Danışmanı Stilize",
+        category: "Moda Danışmanı",
+        service: {
+            worker: "Ayda Koç",
+            title: "Kişisel Stil Analizi",
+            price: 350,
+        },
+        date: "30/05/2025 16:30",
+    },
+    {
+        id: "20",
+        customer: "Bora Şimşek",
+        business: "Sürücü Kursu Yol Bilgisi",
+        category: "Sürücü Kursu",
+        service: {
+            worker: "İnstr. Emine Arı",
+            title: "Direksiyon Dersi",
+            price: 200,
+        },
+        date: "31/05/2025 10:15",
+    },
+];
+
+const comments = [
+    {
+        id: "1",
+        customer: "Ahmet Yılmaz",
+        business: "Güzellik Salonu Lale",
+        service: "Saç Kesimi",
+        worker: "Merve Kaya",
+        comment: "Gerçekten harika bir hizmetti, çok memnun kaldım.",
+        star: 5,
+        date: "12/05/2025 15:30",
+    },
+    {
+        id: "2",
+        customer: "Elif Demir",
+        business: "Güzellik Salonu Lale",
+        service: "Manikür",
+        worker: "Zeynep Şahin",
+        comment: "İşini çok iyi yapan biri, teşekkür ederim.",
+        star: 4,
+        date: "13/05/2025 14:00",
+    },
+    {
+        id: "3",
+        customer: "Mehmet Koç",
+        business: "Estetik Merkezi Ayışığı",
+        service: "Masaj",
+        worker: "Canan Uslu",
+        comment: "Oldukça rahatlatıcıydı, tekrar geleceğim.",
+        star: 5,
+        date: "14/05/2025 17:45",
+    },
+    {
+        id: "4",
+        customer: "Fatma Özkan",
+        business: "Masaj Evi Huzur",
+        service: "Saç Boyama",
+        worker: "Merve Kaya",
+        comment: "Renk istediğim gibi olmadı, biraz hayal kırıklığına uğradım.",
+        star: 2,
+        date: "15/05/2025 10:15",
+    },
+    {
+        id: "5",
+        customer: "Burak Aydın",
+        business: "Güzellik Salonu Lale",
+        service: "Tıraş",
+        worker: "Zeynep Şahin",
+        comment: "Gayet özenli ve titizdi.",
+        star: 4,
+        date: "16/05/2025 09:30",
+    },
+    {
+        id: "6",
+        customer: "Zeynep Kurt",
+        business: "Estetik Merkezi Ayışığı",
+        service: "Cilt Bakımı",
+        worker: "Ayşe Karaca",
+        comment: "Yüzümde gözle görülür bir fark oluştu, teşekkür ederim.",
+        star: 5,
+        date: "17/05/2025 16:00",
+    },
+    {
+        id: "7",
+        customer: "Emre Sarı",
+        business: "Estetik Merkezi Ayışığı",
+        service: "Pedikür",
+        worker: "Zeynep Şahin",
+        comment: "Fena değildi ama biraz aceleye gelmiş gibiydi.",
+        star: 3,
+        date: "18/05/2025 13:30",
+    },
+    {
+        id: "8",
+        customer: "Selin Aksoy",
+        business: "Masaj Evi Huzur",
+        service: "Kaş Alımı",
+        worker: "Seda Polat",
+        comment: "İstediğim şekli tam anlayamadı.",
+        star: 2,
+        date: "19/05/2025 12:00",
+    },
+    {
+        id: "9",
+        customer: "Mustafa Arslan",
+        business: "Güzellik Salonu Lale",
+        service: "Fön",
+        worker: "Merve Kaya",
+        comment: "Çok profesyonel ve ilgiliydi.",
+        star: 5,
+        date: "20/05/2025 11:00",
+    },
+    {
+        id: "10",
+        customer: "Deniz Çelik",
+        business: "Estetik Merkezi Ayışığı",
+        service: "Saç Kesimi",
+        worker: "Canan Uslu",
+        comment: "Saç modelini çok beğendim, kesinlikle tekrar geleceğim.",
+        star: 5,
+        date: "21/05/2025 18:30",
+    },
+];
+
 app.use((req, res, next) => {
-    const delay = Math.random() * (3000 - 500) + 500; // Between 500ms and 3000ms
+    const delay = Math.random() * (1500 - 500) + 500;
     setTimeout(() => {
         next();
     }, delay);
+});
+
+app.get("/api/v1/customers/:id", (req, res) => {
+    res.send({
+        id: "123",
+        name: "Ahmet",
+        surname: "Yılmaz",
+        phone: "05321234567",
+        email: "ahmet.yilmaz@example.com",
+        city: "İstanbul",
+        password: "FakePassword123!",
+        date: "22/07/2025 14:52",
+        favorites: [],
+        accountType: "customer",
+    }).end();
+    res.end();
+});
+app.get("/api/v1/notifications/customers/:id", (req, res) => {
+    res.send([
+        {
+            id: "1",
+            title: "Yeni Mesaj",
+            description: "Müşteri destek ekibinden yeni bir mesajınız var.",
+            date: "16/06/2025 09:00",
+            isRead: false,
+            customer: "musteri_001",
+            business: "isletme_001",
+        },
+        {
+            id: "2",
+            title: "Randevu Hatırlatıcısı",
+            description: "Yarın saat 10:00’da bir randevunuz var.",
+            date: "15/06/2025 08:30",
+            isRead: true,
+            customer: "musteri_002",
+            business: "isletme_002",
+        },
+        {
+            id: "3",
+            title: "Ödeme Başarılı",
+            description: "Yapmış olduğunuz ödeme başarıyla işlendi.",
+            date: "14/06/2025 12:15",
+            isRead: true,
+            customer: "musteri_003",
+            business: "isletme_001",
+        },
+        {
+            id: "4",
+            title: "Yeni Kampanya",
+            description: "Tüm hizmetlerde yaz indirimlerimizi kaçırmayın!",
+            date: "13/06/2025 15:45",
+            isRead: false,
+            customer: "musteri_004",
+            business: "isletme_003",
+        },
+        {
+            id: "5",
+            title: "Hizmet Tamamlandı",
+            description:
+                "Aldığınız hizmet başarıyla tamamlandı. Teşekkür ederiz!",
+            date: "12/06/2025 11:00",
+            isRead: true,
+            customer: "musteri_005",
+            business: "isletme_002",
+        },
+        {
+            id: "6",
+            title: "Geri Bildirim Talebi",
+            description:
+                "Son ziyaretiniz için geri bildirim bırakmayı unutmayın.",
+            date: "11/06/2025 17:20",
+            isRead: false,
+            customer: "musteri_006",
+            business: "isletme_003",
+        },
+        {
+            id: "7",
+            title: "Güncelleme Bildirimi",
+            description: "Hizmet şartlarımız güncellendi. Detayları inceleyin.",
+            date: "10/06/2025 10:00",
+            isRead: false,
+            customer: "musteri_007",
+            business: "isletme_001",
+        },
+        {
+            id: "8",
+            title: "Abonelik Süresi Doldu",
+            description:
+                "Aboneliğinizin süresi doldu. Yenilemek için tıklayın.",
+            date: "09/06/2025 09:30",
+            isRead: true,
+            customer: "musteri_008",
+            business: "isletme_002",
+        },
+        {
+            id: "9",
+            title: "Hediye Çeki Kazandınız",
+            description: "50₺ değerinde hediye çeki kazandınız!",
+            date: "08/06/2025 13:40",
+            isRead: false,
+            customer: "musteri_009",
+            business: "isletme_003",
+        },
+        {
+            id: "10",
+            title: "Güvenlik Uyarısı",
+            description: "Hesabınıza yeni bir giriş tespit edildi.",
+            date: "07/06/2025 21:15",
+            isRead: true,
+            customer: "musteri_010",
+            business: "isletme_001",
+        },
+    ]);
+});
+
+app.get("/api/v1/businesses/:id", (req, res) => {
+    const id = req.params.id;
+    res.send(businesses.find((elem) => Math.random() > 0.6));
 });
 
 app.delete("/api/v1/customers/:id/favorites/:id2", (req, res) => {
     const a = req.params.id;
     const b = req.params.id2;
 
-    res.send({ message: a + b + " başarılıyla silindi" });
+    res.send({ message: a + " " + b + " başarılıyla silindi" });
 });
 
 app.get("/api/v1/customers/:id/favorites", (req, res) => {
     res.send(businesses.filter((elem) => Math.random() < 0.5));
+    res.end();
+});
+
+app.get("/api/v1/appointments/customers/:id", (req, res) => {
+    res.send(appointments);
+    res.end();
+});
+app.get("/api/v1/appointments/businesses/:id", (req, res) => {
+    res.send(appointments);
+    res.end();
+});
+
+app.post("/api/v1/appointments", (req, res) => {
+    res.send({ message: "başarıyla oldu" });
     res.end();
 });
 
@@ -497,104 +935,6 @@ app.get("/api/v1/auth/reset-password", (req, res) => {
     res.end();
 });
 
-app.get("/api/v1/notifications", (req, res) => {
-    res.send([
-        {
-            id: "1",
-            title: "Yeni Mesaj",
-            description: "Müşteri destek ekibinden yeni bir mesajınız var.",
-            date: "16/06/2025 09:00",
-            isRead: false,
-            customer: "musteri_001",
-            business: "isletme_001",
-        },
-        {
-            id: "2",
-            title: "Randevu Hatırlatıcısı",
-            description: "Yarın saat 10:00’da bir randevunuz var.",
-            date: "15/06/2025 08:30",
-            isRead: true,
-            customer: "musteri_002",
-            business: "isletme_002",
-        },
-        {
-            id: "3",
-            title: "Ödeme Başarılı",
-            description: "Yapmış olduğunuz ödeme başarıyla işlendi.",
-            date: "14/06/2025 12:15",
-            isRead: true,
-            customer: "musteri_003",
-            business: "isletme_001",
-        },
-        {
-            id: "4",
-            title: "Yeni Kampanya",
-            description: "Tüm hizmetlerde yaz indirimlerimizi kaçırmayın!",
-            date: "13/06/2025 15:45",
-            isRead: false,
-            customer: "musteri_004",
-            business: "isletme_003",
-        },
-        {
-            id: "5",
-            title: "Hizmet Tamamlandı",
-            description:
-                "Aldığınız hizmet başarıyla tamamlandı. Teşekkür ederiz!",
-            date: "12/06/2025 11:00",
-            isRead: true,
-            customer: "musteri_005",
-            business: "isletme_002",
-        },
-        {
-            id: "6",
-            title: "Geri Bildirim Talebi",
-            description:
-                "Son ziyaretiniz için geri bildirim bırakmayı unutmayın.",
-            date: "11/06/2025 17:20",
-            isRead: false,
-            customer: "musteri_006",
-            business: "isletme_003",
-        },
-        {
-            id: "7",
-            title: "Güncelleme Bildirimi",
-            description: "Hizmet şartlarımız güncellendi. Detayları inceleyin.",
-            date: "10/06/2025 10:00",
-            isRead: false,
-            customer: "musteri_007",
-            business: "isletme_001",
-        },
-        {
-            id: "8",
-            title: "Abonelik Süresi Doldu",
-            description:
-                "Aboneliğinizin süresi doldu. Yenilemek için tıklayın.",
-            date: "09/06/2025 09:30",
-            isRead: true,
-            customer: "musteri_008",
-            business: "isletme_002",
-        },
-        {
-            id: "9",
-            title: "Hediye Çeki Kazandınız",
-            description: "50₺ değerinde hediye çeki kazandınız!",
-            date: "08/06/2025 13:40",
-            isRead: false,
-            customer: "musteri_009",
-            business: "isletme_003",
-        },
-        {
-            id: "10",
-            title: "Güvenlik Uyarısı",
-            description: "Hesabınıza yeni bir giriş tespit edildi.",
-            date: "07/06/2025 21:15",
-            isRead: true,
-            customer: "musteri_010",
-            business: "isletme_001",
-        },
-    ]);
-});
-
 app.get("/api/v1/customers", (req, res) => {
     res.send({
         id: "123",
@@ -605,7 +945,7 @@ app.get("/api/v1/customers", (req, res) => {
         city: "İstanbul",
         password: "FakePassword123!",
         date: "22/07/2025 14:52",
-        favoriedBusinesses: [],
+        favorites: [],
         accountType: "customer",
     }).end();
 });
@@ -614,221 +954,12 @@ app.put("/api/v1/customers", (req, res) => {
     res.send({ message: "Değişiklikler başarıyla kayıt edildi" }).end();
 });
 
-app.get("/api/v1/appointments", (req, res) => {
-    res.send([
-        {
-            id: "1",
-            customer: "müşteri_001",
-            business: "Güzellik Dünyası",
-            service: {
-                worker: "Ayşe Yılmaz",
-                name: "Klasik Cilt Bakımı",
-                price: 300,
-            },
-            date: "12/06/2025 10:30",
-        },
-        {
-            id: "2",
-            customer: "müşteri_002",
-            business: "Elif Spa & Wellness",
-            service: {
-                worker: "Zeynep Korkmaz",
-                name: "Aromaterapi Masajı",
-                price: 600,
-            },
-            date: "12/06/2025 11:15",
-        },
-        {
-            id: "3",
-            customer: "müşteri_003",
-            business: "Makyaj Atölyesi",
-            service: {
-                worker: "Elif Demir",
-                name: "Gelin Makyajı",
-                price: 400,
-            },
-            date: "12/06/2025 13:00",
-        },
-        {
-            id: "4",
-            customer: "müşteri_004",
-            business: "BarberKing Erkek Kuaförü",
-            service: { worker: "Mehmet Kaya", name: "Saç Kesimi", price: 150 },
-            date: "12/06/2025 14:20",
-        },
-        {
-            id: "5",
-            customer: "müşteri_005",
-            business: "Nail Art Studio",
-            service: { worker: "Buse Arslan", name: "Manikür", price: 120 },
-            date: "12/06/2025 15:00",
-        },
-        {
-            id: "6",
-            customer: "müşteri_006",
-            business: "Elif Spa & Wellness",
-            service: {
-                worker: "Deniz Çetin",
-                name: "Detoks Bakımı",
-                price: 500,
-            },
-            date: "12/06/2025 16:30",
-        },
-        {
-            id: "7",
-            customer: "müşteri_007",
-            business: "BarberKing Erkek Kuaförü",
-            service: { worker: "Ali Can", name: "Sakal Tıraşı", price: 90 },
-            date: "12/06/2025 17:15",
-        },
-        {
-            id: "8",
-            customer: "müşteri_008",
-            business: "Kuaför Stil",
-            service: { worker: "Selin Öztürk", name: "Fön", price: 70 },
-            date: "12/06/2025 18:00",
-        },
-        {
-            id: "9",
-            customer: "müşteri_009",
-            business: "Huzur Spa Merkezi",
-            service: {
-                worker: "Emine Aydın",
-                name: "Derin Doku Masajı",
-                price: 750,
-            },
-            date: "12/06/2025 19:30",
-        },
-        {
-            id: "10",
-            customer: "müşteri_010",
-            business: "Güzellik Dünyası",
-            service: {
-                worker: "Fatma Koç",
-                name: "Anti-Aging Bakım",
-                price: 450,
-            },
-            date: "12/06/2025 20:15",
-        },
-    ]);
-});
-
 app.get("/api/v1/businesses", (req, res) => {
     res.send(businesses);
 });
 
-app.get("/api/v1/businesses/:id", (req, res) => {
-    const id = req.params.id;
-
-    res.send(businesses.find((elem) => elem.id === id));
-});
-
 app.get("/api/v1/businesses/:id/comments", (req, res) => {
-    const id = req.params.id;
-
-    res.json([
-        {
-            id: "1",
-            customer: "c1",
-            business: "b1",
-            service: "Saç Kesimi",
-            worker: "w1",
-            comment: "Gerçekten harika bir hizmetti, çok memnun kaldım.",
-            star: 5,
-            date: "12/05/2025 15:30",
-        },
-        {
-            id: "2",
-            customer: "c2",
-            business: "b1",
-            service: "Manikür",
-            worker: "w2",
-            comment: "İşini çok iyi yapan biri, teşekkür ederim.",
-            star: 4,
-            date: "13/05/2025 14:00",
-        },
-        {
-            id: "3",
-            customer: "c3",
-            business: "b2",
-            service: "Masaj",
-            worker: "w3",
-            comment: "Oldukça rahatlatıcıydı, tekrar geleceğim.",
-            star: 5,
-            date: "14/05/2025 17:45",
-        },
-        {
-            id: "4",
-            customer: "c4",
-            business: "b3",
-            service: "Saç Boyama",
-            worker: "w1",
-            comment:
-                "Renk istediğim gibi olmadı, biraz hayal kırıklığına uğradım.",
-            star: 2,
-            date: "15/05/2025 10:15",
-        },
-        {
-            id: "5",
-            customer: "c5",
-            business: "b1",
-            service: "Tıraş",
-            worker: "w2",
-            comment: "Gayet özenli ve titizdi.",
-            star: 4,
-            date: "16/05/2025 09:30",
-        },
-        {
-            id: "6",
-            customer: "c6",
-            business: "b4",
-            service: "Cilt Bakımı",
-            worker: "w4",
-            comment: "Yüzümde gözle görülür bir fark oluştu, teşekkür ederim.",
-            star: 5,
-            date: "17/05/2025 16:00",
-        },
-        {
-            id: "7",
-            customer: "c7",
-            business: "b2",
-            service: "Pedikür",
-            worker: "w2",
-            comment: "Fena değildi ama biraz aceleye gelmiş gibiydi.",
-            star: 3,
-            date: "18/05/2025 13:30",
-        },
-        {
-            id: "8",
-            customer: "c8",
-            business: "b3",
-            service: "Kaş Alımı",
-            worker: "w5",
-            comment: "İstediğim şekli tam anlayamadı.",
-            star: 2,
-            date: "19/05/2025 12:00",
-        },
-        {
-            id: "9",
-            customer: "c9",
-            business: "b4",
-            service: "Fön",
-            worker: "w1",
-            comment: "Çok profesyonel ve ilgiliydi.",
-            star: 5,
-            date: "20/05/2025 11:00",
-        },
-        {
-            id: "10",
-            customer: "c10",
-            business: "b2",
-            service: "Saç Kesimi",
-            worker: "w3",
-            comment: "Saç modelini çok beğendim, kesinlikle tekrar geleceğim.",
-            star: 5,
-            date: "21/05/2025 18:30",
-        },
-    ]);
+    res.json(comments).end();
 });
 
 app.listen(port, () => {});

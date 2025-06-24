@@ -8,7 +8,7 @@ export default function AccountScreen() {
             contentContainerStyle={{ flexGrow: 1 }}
         >
             <View>
-                <Text className="text-center text-4xl font-semibold text-violet-700">
+                <Text className="text-center text-5xl font-semibold text-violet-700">
                     Hesabım
                 </Text>
             </View>

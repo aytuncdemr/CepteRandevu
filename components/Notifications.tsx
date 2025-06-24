@@ -1,6 +1,6 @@
-import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { Notification } from "../interfaces/Notification";
 
 export default function Notifications({
@@ -16,10 +16,10 @@ export default function Notifications({
                         className="border border-gray-300 p-4 rounded-lg flex flex-row gap-4 "
                         key={notification.id}
                     >
-                        <View>
+                        <View className="bg-violet-100 flex items-center justify-center w-16 h-16 rounded-xl">
                             <FontAwesomeIcon
-                                style={{ color: "rgb(255, 126, 42)" }}
-                                icon={faCalendarCheck}
+                                style={{ color: "#a78bfa" }}
+                                icon={faBell}
                                 size={36}
                             ></FontAwesomeIcon>
                         </View>
@@ -30,9 +30,27 @@ export default function Notifications({
                             <Text className="text-lg text-gray-600">
                                 {notification.description}
                             </Text>
-                            <Text className="text-gray-500 text-base">
-                                {notification.date}
-                            </Text>
+                            <View className="flex flex-row gap-4 mt-4 items-center">
+                                <View className="flex flex-row gap-2 items-center">
+                                    <FontAwesomeIcon
+                                        icon={faCalendar}
+                                        size={16}
+                                        color="#F28C28"
+                                    ></FontAwesomeIcon>
+                                    <Text className="text-gray-500 text-lg">
+                                        {notification.date.split(" ")[0]}
+                                    </Text>
+                                </View>
+                                <View className="flex  flex-row gap-2 items-center">
+                                    <FontAwesomeIcon
+                                        color="#8b5cf6"
+                                        icon={faClock}
+                                    ></FontAwesomeIcon>
+                                    <Text className="text-gray-500 text-lg">
+                                        {notification.date.split(" ")[1]}
+                                    </Text>
+                                </View>
+                            </View>
                         </View>
                     </View>
                 );

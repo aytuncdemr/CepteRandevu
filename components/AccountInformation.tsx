@@ -39,7 +39,7 @@ export default function AccountInformation() {
         city: Yup.string().required("Şehir zorunludur"),
         date: Yup.string().required("date"),
         accountType: Yup.string().required("accountType"),
-        favoriedBusinesses: Yup.array().of(Yup.string()),
+        favorites: Yup.array().of(Yup.string()),
     });
 
     useEffect(() => {
@@ -48,7 +48,7 @@ export default function AccountInformation() {
                 const { data } = await axios.get(
                     API_URL + `/customers/${authContext?.id}`
                 );
-                setCustomer(data as Customer);
+                setCustomer(data);
             } catch (error) {
                 handleFetchError(error);
             }
@@ -251,7 +251,7 @@ export default function AccountInformation() {
 
                         <Pressable
                             disabled={isSubmitting}
-                            onPress={() => handleSubmit()}
+                            onPress={handleSubmit as any}
                         >
                             <View className="button-outer">
                                 <View className="button-text h-[25px]">

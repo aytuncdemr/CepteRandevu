@@ -3,12 +3,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/global/LoginScreen";
 import RegisterScreen from "../screens/global/RegisterScreen";
 import BusinessBottomBar from "./BusinessBottomBar";
-import { Pressable, SafeAreaView, Text } from "react-native";
+import { Pressable, SafeAreaView } from "react-native";
 import CustomerNavigation from "./CustomerNavigation";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-    faChevronLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 export type RootStackParamList = {
     LoginScreen: undefined;

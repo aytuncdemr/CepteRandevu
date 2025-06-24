@@ -1,129 +1,261 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import React, { useContext, useState } from "react";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Pressable,
+    ActivityIndicator,
+} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Business } from "../interfaces/Business";
+import handleFetchError from "../utils/handleFetchError";
+import axios from "axios";
+import { API_URL } from "../data/API_URL";
+import { AuthContext } from "../context/AuthContext";
+import Toast from "react-native-toast-message";
+import { CustomerRootStackParamList } from "../navigation/CustomerNavigation";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { Formik } from "formik";
+import * as Yup from "yup";
 
 export default function AppointmentForm({ business }: { business: Business }) {
+    const navigator =
+        useNavigation<NavigationProp<CustomerRootStackParamList>>();
+    const authContext = useContext(AuthContext);
+
     const [dateOpen, setDateOpen] = useState(false);
-    const [date, setDate] = useState<string>("");
-
     const [hourOpen, setHourOpen] = useState(false);
-    const [hour, setHour] = useState<string>("");
-
     const [serviceOpen, setServiceOpen] = useState(false);
-    const [service, setService] = useState<string>("");
-
     const [employeeOpen, setEmployeeOpen] = useState(false);
-    const [employee, setEmployee] = useState<string>("");
 
-    async function handleSubmit() {}
+    const AppointmentSchema = Yup.object().shape({
+        service: Yup.string().required("Hizmet seçimi zorunludur."),
+        employee: Yup.string().required("Çalışan seçimi zorunludur."),
+        date: Yup.string().required("Tarih seçimi zorunludur."),
+        hour: Yup.string().required("Saat seçimi zorunludur."),
+        category: Yup.string().required("Kategori zorunludur."),
+    });
+
+    function closeOtherDropdowns(
+        currentSetOpenFunction: React.Dispatch<React.SetStateAction<boolean>>
+    ) {
+        // First, close all dropdowns.
+        setServiceOpen(false);
+        setEmployeeOpen(false);
+        setDateOpen(false);
+        setHourOpen(false);
+
+        currentSetOpenFunction(true);
+    }
+
+    async function submitHandler(values: {
+        service: string;
+        employee: string;
+        date: string;
+        hour: string;
+        category: string;
+    }) {
+        try {
+            const selectedService = business.services.find(
+                (s) => s.title === values.service
+            );
+
+            const { data } = await axios.post(API_URL + `/appointments`, {
+                customer: authContext?.id,
+                business: business.id,
+                service: {
+                    worker: values.employee,
+                    name: values.service,
+                    price: selectedService?.price,
+                },
+                category: values.category,
+                date: values.date + " " + values.hour,
+            });
+
+            Toast.hide();
+            Toast.show({
+                type: "success",
+                text1: "Başarılı",
+                text2: data.message,
+            });
+            navigator.goBack();
+        } catch (error) {
+            handleFetchError(error);
+        }
+    }
 
     return (
-        <View className="flex flex-col gap-2 p-6">
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>Hizmet</Text>
-                <DropDownPicker
-                    listMode="SCROLLVIEW"
-                    open={serviceOpen}
-                    value={service}
-                    items={business.services.map((s) => ({
-                        label: s.title,
-                        value: s.title,
-                    }))}
-                    setOpen={setServiceOpen}
-                    setValue={setService}
-                    placeholder="Seçiniz"
-                    containerStyle={styles.dropdownContainer}
-                    style={styles.dropdown}
-                    dropDownContainerStyle={styles.dropdownListContainer}
-                    zIndex={7000}
-                    onOpen={() => {
-                        setHourOpen(false);
-                        setEmployeeOpen(false);
-                        setDateOpen(false);
-                    }}
-                />
-            </View>
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>Çalışan</Text>
-                <DropDownPicker
-                    listMode="SCROLLVIEW"
-                    open={employeeOpen}
-                    value={employee}
-                    items={business.workers.map((w) => ({
-                        label: w,
-                        value: w,
-                    }))}
-                    setOpen={setEmployeeOpen}
-                    setValue={setEmployee}
-                    placeholder="Seçiniz"
-                    containerStyle={styles.dropdownContainer}
-                    style={styles.dropdown}
-                    dropDownContainerStyle={styles.dropdownListContainer}
-                    zIndex={6000}
-                    onOpen={() => {
-                        setHourOpen(false);
-                        setServiceOpen(false);
-                        setDateOpen(false);
-                    }}
-                />
-            </View>
-              <View style={styles.inputGroup}>
-                <Text style={styles.label}>Tarih</Text>
-                <DropDownPicker
-                    listMode="SCROLLVIEW"
-                    open={dateOpen}
-                    value={date}
-                    items={business.workDays.map((w) => ({
-                        label: w,
-                        value: w,
-                    }))}
-                    setOpen={setDateOpen}
-                    setValue={setDate}
-                    placeholder="Seçiniz"
-                    containerStyle={styles.dropdownContainer}
-                    style={styles.dropdown}
-                    dropDownContainerStyle={styles.dropdownListContainer}
-                    zIndex={5000}
-                    onOpen={() => {
-                        setHourOpen(false);
-                        setServiceOpen(false);
-                        setEmployeeOpen(false);
-                    }}
-                />
-            </View>
+        <Formik
+            initialValues={{
+                service: "",
+                employee: "",
+                date: "",
+                hour: "",
+                category: business.category,
+            }}
+            validationSchema={AppointmentSchema}
+            onSubmit={submitHandler}
+        >
+            {({
+                handleSubmit,
+                values,
+                errors,
+                touched,
+                setFieldValue,
+                isSubmitting,
+            }) => (
+                <View className="flex flex-col gap-2 p-6">
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Hizmet</Text>
+                        <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            open={serviceOpen}
+                            value={values.service}
+                            items={business.services.map((s) => ({
+                                label: s.title,
+                                value: s.title,
+                            }))}
+                            setOpen={setServiceOpen}
+                            setValue={(val) =>
+                                setFieldValue("service", val(values.service))
+                            }
+                            placeholder="Seçiniz"
+                            containerStyle={styles.dropdownContainer}
+                            style={[
+                                styles.dropdown,
+                                touched.service &&
+                                    errors.service &&
+                                    styles.inputErrorBorder,
+                            ]}
+                            dropDownContainerStyle={
+                                styles.dropdownListContainer
+                            }
+                            zIndex={7000}
+                            onOpen={() => closeOtherDropdowns(setServiceOpen)}
+                        />
+                        {touched.service && errors.service && (
+                            <Text style={styles.errorText}>
+                                {errors.service}
+                            </Text>
+                        )}
+                    </View>
 
-            <View style={styles.inputGroup}>
-                <Text style={styles.label}>Saat</Text>
-                <DropDownPicker
-                    listMode="SCROLLVIEW"
-                    open={hourOpen} 
-                    value={hour}
-                    items={business.workHours.map((h) => ({
-                        label: h,
-                        value: h,
-                    }))}
-                    setOpen={setHourOpen}
-                    setValue={setHour}
-                    placeholder="Seçiniz"
-                    containerStyle={styles.dropdownContainer}
-                    style={styles.dropdown}
-                    dropDownContainerStyle={styles.dropdownListContainer}
-                    zIndex={4000}
-                    onOpen={() => {
-                        setServiceOpen(false);
-                        setEmployeeOpen(false);
-                        setDateOpen(false);
-                    }}
-                />
-            </View>
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Çalışan</Text>
+                        <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            open={employeeOpen}
+                            value={values.employee}
+                            items={business.workers.map((w) => ({
+                                label: w,
+                                value: w,
+                            }))}
+                            setOpen={setEmployeeOpen} // Direct setter
+                            setValue={(val) =>
+                                setFieldValue("employee", val(values.employee))
+                            }
+                            placeholder="Seçiniz"
+                            containerStyle={styles.dropdownContainer}
+                            style={[
+                                styles.dropdown,
+                                touched.employee &&
+                                    errors.employee &&
+                                    styles.inputErrorBorder,
+                            ]}
+                            dropDownContainerStyle={
+                                styles.dropdownListContainer
+                            }
+                            zIndex={6000}
+                            onOpen={() => closeOtherDropdowns(setEmployeeOpen)}
+                        />
+                        {touched.employee && errors.employee && (
+                            <Text style={styles.errorText}>
+                                {errors.employee}
+                            </Text>
+                        )}
+                    </View>
 
-            <Pressable onPress={handleSubmit}>
-                <View className="button-outer !bg-[#FF7D1E] mt-32">
-                    <Text className="button-text">Randevu Al</Text>
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Tarih</Text>
+                        <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            open={dateOpen}
+                            value={values.date}
+                            items={business.workDays.map((w) => ({
+                                label: w,
+                                value: w,
+                            }))}
+                            setOpen={setDateOpen}
+                            setValue={(val) =>
+                                setFieldValue("date", val(values.date))
+                            }
+                            placeholder="Seçiniz"
+                            containerStyle={styles.dropdownContainer}
+                            style={[
+                                styles.dropdown,
+                                touched.date &&
+                                    errors.date &&
+                                    styles.inputErrorBorder,
+                            ]}
+                            dropDownContainerStyle={
+                                styles.dropdownListContainer
+                            }
+                            zIndex={5000}
+                            onOpen={() => closeOtherDropdowns(setDateOpen)}
+                        />
+                        {touched.date && errors.date && (
+                            <Text style={styles.errorText}>{errors.date}</Text>
+                        )}
+                    </View>
+
+                    <View style={styles.inputGroup}>
+                        <Text style={styles.label}>Saat</Text>
+                        <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            open={hourOpen}
+                            value={values.hour}
+                            items={business.workHours.map((h) => ({
+                                label: h,
+                                value: h,
+                            }))}
+                            setOpen={setHourOpen}
+                            setValue={(val) =>
+                                setFieldValue("hour", val(values.hour))
+                            }
+                            placeholder="Seçiniz"
+                            containerStyle={styles.dropdownContainer}
+                            style={[
+                                styles.dropdown,
+                                touched.hour &&
+                                    errors.hour &&
+                                    styles.inputErrorBorder,
+                            ]}
+                            dropDownContainerStyle={
+                                styles.dropdownListContainer
+                            }
+                            zIndex={4000}
+                            onOpen={() => closeOtherDropdowns(setHourOpen)}
+                        />
+                        {touched.hour && errors.hour && (
+                            <Text style={styles.errorText}>{errors.hour}</Text>
+                        )}
+                    </View>
+
+                    <Pressable
+                        disabled={isSubmitting}
+                        onPress={handleSubmit as any}
+                    >
+                        <View className="button-outer !bg-[#FF7D1E] mt-8">
+                            {isSubmitting ? (
+                                <ActivityIndicator size="small" color="#fff" />
+                            ) : (
+                                <Text className="button-text">Randevu Al</Text>
+                            )}
+                        </View>
+                    </Pressable>
                 </View>
-            </Pressable>
-        </View>
+            )}
+        </Formik>
     );
 }
 
@@ -181,5 +313,13 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 20,
         fontWeight: "600",
+    },
+    errorText: {
+        fontSize: 12,
+        color: "red",
+        marginTop: 4,
+    },
+    inputErrorBorder: {
+        borderColor: "red",
     },
 });

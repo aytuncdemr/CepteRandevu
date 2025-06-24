@@ -7,6 +7,7 @@ import handleFetchError from "../../utils/handleFetchError";
 import LoadingScreen from "../global/LoadingScreen";
 import VerticalList from "../../components/VerticalList";
 import businessQueryFilter from "../../utils/businessQueryFilter";
+import { API_URL } from "../../data/API_URL";
 
 export default function SearchScreen() {
     const [query, setQuery] = useState("");
@@ -14,11 +15,8 @@ export default function SearchScreen() {
 
     useEffect(() => {
         async function fetchBusinesses() {
-            setBusinesses(null);
             try {
-                const { data } = await axios.get(
-                    "http://127.0.0.1:3000/api/v1/businesses"
-                );
+                const { data } = await axios.get(API_URL + "/businesses");
 
                 setBusinesses(data);
             } catch (error) {
@@ -26,7 +24,9 @@ export default function SearchScreen() {
             }
         }
 
-        fetchBusinesses();
+        const id = setTimeout(() => fetchBusinesses(), 1000);
+
+        return () => clearTimeout(id);
     }, [query]);
 
     return (
@@ -43,7 +43,10 @@ export default function SearchScreen() {
                 {businesses && (
                     <VerticalList
                         businesses={businesses.filter((business: Business) =>
-                            businessQueryFilter(query.toLowerCase().trim(), business)
+                            businessQueryFilter(
+                                query.toLowerCase().trim(),
+                                business
+                            )
                         )}
                     ></VerticalList>
                 )}

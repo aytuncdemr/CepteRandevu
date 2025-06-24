@@ -22,23 +22,25 @@ hedeflemekte.
 
 # Kullanılacak Teknolojiler
 
-Frontend
+Frontend - (Aytunç Demir)
 
-✅ React Native
-
-✅ React Navigation
+✅ React / React Native
 
 ✅ Typescript
 
+✅ React Navigation
+
 ✅ Axios
+
+✅ Yup & Formik
 
 ✅ TailwindCSS
 
 ✅ Toastify
 
-✅ Font Awesome
+✅ FontAwesome
 
-Backend
+Backend - (Mert Temiz)
 
 ✅ Nodejs
 
@@ -48,7 +50,7 @@ Backend
 
 ✅ Firebase (firestore,storage,auth)
 
-Dizayn
+Dizayn - (Ahmet Eren Yavaş)
 
 ✅ Figma
 
@@ -58,12 +60,12 @@ Dizayn
 
 Yönetim/ Aytunç Demir
 
-Yapay Zeka/ Fatih Top
-
 Frontend/ Aytunç Demir
 
 Backend/ Mert Temiz
 
-Dizayn/ Ahmet Eren Yavaş + Fatih Top
+Yapay Zeka/ Mehmet Fatih Top
 
-Test/ Ahmet Eren Yavaş + Fatih Top
+Dizayn/ Ahmet Eren Yavaş
+
+Test/ Ahmet Eren Yavaş ve Mehmet Fatih Top

@@ -36,15 +36,10 @@ export default function SearchBar({
 
                 <View className="flex-1">
                     {!isSearching && <Text className="text-gray-400">Ara</Text>}
-                    {isSearching && (
+                    {isSearching && setQuery && (
                         <TextInput
                             value={query}
-                            onChangeText={(e) =>
-                                (
-                                    setQuery as React.Dispatch<
-                                        React.SetStateAction<string>
-                                    >
-                                )(e)
+                            onChangeText={(e) => setQuery(e)
                             }
                             placeholder="Ara"
                             autoCapitalize="none"

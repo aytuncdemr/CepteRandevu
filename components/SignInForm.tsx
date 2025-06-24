@@ -73,7 +73,7 @@ export default function SignInForm() {
                 API_URL + "/auth/reset-password",
                 { email: resetEmail }
             );
-                Toast.hide();
+            Toast.hide();
 
             Toast.show({
                 type: "success",
@@ -148,7 +148,7 @@ export default function SignInForm() {
                                 Şifremi unuttum
                             </Text>
                         </Pressable>
-                        <Pressable onPress={() => handleSubmit()}>
+                        <Pressable onPress={ handleSubmit as any}>
                             <View className="button-outer">
                                 <View className="button-text h-[25px]">
                                     {isSubmitting ? (
@@ -176,7 +176,7 @@ export default function SignInForm() {
                         Kayıt Ol
                     </Text>
                 </View>
-                <View className="max-w-[90%] w-[90%] mx-auto flex flex-col justify-center  gap-4">
+                <View className="max-w-[90%] w-[90%] mx-auto flex flex-col justify-center  gap-4 mt-6">
                     <Pressable
                         onPress={() =>
                             navigator.navigate("RegisterScreen", {

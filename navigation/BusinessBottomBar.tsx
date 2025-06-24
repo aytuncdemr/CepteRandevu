@@ -4,12 +4,16 @@ import CommentsScreen from "../screens/business/CommentsScreen";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
     faBuilding,
-    faBusinessTime,
     faListSquares,
     faMessage,
-    faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import AppointmentsScreen from "../screens/global/AppointmentsScreen";
+import { Pressable, Text, View } from "react-native";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "./RootNavigation";
 
 export type BusinessBottomTabParamList = {
     AppointmentsScreen: undefined;
@@ -20,6 +24,10 @@ export type BusinessBottomTabParamList = {
 const Tab = createBottomTabNavigator<BusinessBottomTabParamList>();
 
 export default function BusinessBottomBar() {
+    const authContext = useContext(AuthContext);
+    const navigator =
+        useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
     return (
         <Tab.Navigator
             screenOptions={{
@@ -64,13 +72,35 @@ export default function BusinessBottomBar() {
                 name="AccountScreen"
                 component={AccountScreen}
                 options={{
-                    tabBarIcon: ({ color, size, focused }) => (
+                    headerShown: true,
+                    headerTitle: "",
+                    headerShadowVisible: false,
+                    headerStyle: {
+                        elevation: 0,
+                        shadowOpacity: 0,
+                        borderBottomWidth: 0,
+                    },
+                    tabBarIcon: ({ color, size }) => (
                         <FontAwesomeIcon
+                            icon={faBuilding}
                             size={size}
                             color={color}
-                            icon={faBuilding}
-                            style={{ marginBottom: 4 }}
-                        ></FontAwesomeIcon>
+                            style={{ marginBottom: 6 }}
+                        />
+                    ),
+                    headerRight: () => (
+                        <Pressable
+                            onPress={() => {
+                                authContext?.setId(null);
+                                navigator.navigate("LoginScreen");
+                            }}
+                        >
+                            <View style={{ marginRight: 12 }}>
+                                <Text className="text-red-500 text-xl font-semibold">
+                                    Çıkış yap
+                                </Text>
+                            </View>
+                        </Pressable>
                     ),
                     tabBarLabel: "Hesabım",
                 }}

@@ -5,11 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { CustomerRootStackParamList } from "../navigation/CustomerNavigation";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-    faBookmark,
-    faHeart,
-    faSquareXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import handleFetchError from "../utils/handleFetchError";
 import { API_URL } from "../data/API_URL";
 import { useContext } from "react";
@@ -31,15 +27,16 @@ export default function VerticalList({
     const authContext = useContext(AuthContext);
     async function deleteFavoriteHandler(id: string) {
         try {
-            if (setBusinesses) {
-                setBusinesses((prevBusinesses) =>
-                    prevBusinesses
-                        ? prevBusinesses?.filter(
-                              (business) => business.id !== id
-                          )
-                        : null
-                );
+            if (!isFavorites || !setBusinesses) {
+                return;
             }
+
+            setBusinesses((prevBusinesses) =>
+                prevBusinesses
+                    ? prevBusinesses?.filter((business) => business.id !== id)
+                    : null
+            );
+
             const { data } = await axios.delete(
                 API_URL + `/customers/${authContext?.id}/favorites/${id}`
             );
@@ -92,7 +89,7 @@ export default function VerticalList({
                                 </Text>
                             </View>
                             {isFavorites && (
-                                <View className="absolute top-2 right-2">
+                                <View className="absolute top-3 right-3">
                                     <Pressable
                                         onPress={() =>
                                             deleteFavoriteHandler(business.id)
