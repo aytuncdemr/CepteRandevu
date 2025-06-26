@@ -7,9 +7,11 @@ import { AuthContext } from "../../context/AuthContext";
 import LoadingScreen from "../global/LoadingScreen";
 import VerticalList from "../../components/VerticalList";
 import { API_URL } from "../../data/API_URL";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function FavoritesScreen() {
     const authContext = useContext(AuthContext);
+    const isFocused = useIsFocused();
 
     const [businesses, setBusinesses] = useState<Business[] | null>(null);
     useEffect(() => {
@@ -23,9 +25,12 @@ export default function FavoritesScreen() {
                 handleFetchError(error);
             }
         }
-
-        fetchFavoriteBusinesses();
-    }, []);
+        if (isFocused) {
+            fetchFavoriteBusinesses();
+        } else {
+            setBusinesses(null);
+        }
+    }, [isFocused]);
 
     if (!businesses) {
         return <LoadingScreen />;

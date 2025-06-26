@@ -7,14 +7,15 @@ import LoadingScreen from "./LoadingScreen";
 import Appointments from "../../components/Appointments";
 import { API_URL } from "../../data/API_URL";
 import { AuthContext } from "../../context/AuthContext";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function AppointmentsScreen({
     isCustomer,
 }: {
     isCustomer: boolean;
 }) {
-
     const authContext = useContext(AuthContext);
+    const isFocused = useIsFocused();
 
     const [appointments, setAppointments] = useState<Appointment[] | null>(
         null
@@ -35,9 +36,12 @@ export default function AppointmentsScreen({
                 handleFetchError(error);
             }
         }
-        fetchAppointments();
-    }, []);
-
+        if (isFocused) {
+            fetchAppointments();
+        } else {
+            setAppointments(null);
+        }
+    }, [isFocused]);
     if (!appointments) {
         return <LoadingScreen />;
     }

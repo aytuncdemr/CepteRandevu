@@ -7,9 +7,12 @@ import handleFetchError from "../../utils/handleFetchError";
 import { API_URL } from "../../data/API_URL";
 import axios from "axios";
 import LoadingScreen from "../global/LoadingScreen";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function CommentsScreen() {
     const authContext = useContext(AuthContext);
+    const isFocused = useIsFocused();
+
     const [business, setBusiness] = useState<Business | null>(null);
 
     useEffect(() => {
@@ -23,8 +26,12 @@ export default function CommentsScreen() {
                 handleFetchError(error);
             }
         }
-        fetchBusiness();
-    }, [authContext]);
+        if (isFocused) {
+            fetchBusiness();
+        } else {
+            setBusiness(null);
+        }
+    }, [authContext, isFocused]);
 
     if (!business) {
         return <LoadingScreen></LoadingScreen>;

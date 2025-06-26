@@ -1,31 +1,62 @@
 main route: /api/v1
 
-POST /auth/login {email,password} -> {id,accountType}
-POST /auth/register/business {email,password....,accountType} -> {message}
-POST /auth/register/customer {email,password....,accountType} -> {message}
-POST /auth/reset-password {email} -> {message}
+** hata olan tüm yerlerde {message:"hata mesajı"} olarak dönülecek
+** POST-PUT requestlerinde dönülen {message} işlemin başarılı olduğunu belirtecek 
+** (id hariç) yazılan POST işlemlerinde id backend'de objenin içine eklenecek ve database kayıt edilecek
+
+POST /auth/login 
+{email,password} -> {id,accountType}
+
+POST /auth/register/business 
+business.ts içindeki her şey (id dışında) -> {message}
+POST /auth/register/customer 
+customer.ts içindeki her şey (id dışında) -> {message}
+
+POST /auth/reset-password
+{email} -> {message}
 
 GET /customers/:id
-PUT /customers/:id 
+yok -> {data:customer}
 
-GET /customers/:id/favorites
+PUT /customers/:id 
+customer.ts içindeki her şey -> {message}
+
+GET /customers/:id/favorites // kullanıcının favorilerinin bilgileri dönülecek
+yok -> {data:businesses[]}
+
 POST /customers/:id/favorites/:id
+yok -> {message}
+
 DELETE /customers/:id/favorites/:id
+yok -> {message}
 
 GET /businesses
+yok -> {data:businesses[]}
+
 GET /businesses/:id
+yok -> {data:business}
+
 PUT /businesses/:id
+business.ts içindeki her şey -> {message}
 
 GET /businesses/categories
+yok -> {data:string[]}
 
-GET /appointments/customers/:id
-GET /appointments/businesses/:id
+GET /appointments/customers/:id // appointments'lerden customer == :id olanlar
+yok -> {data:appointment[]}
+
+GET /appointments/businesses/:id // appointments'lerden business == :id olanlar
+yok -> {data:appointment[]}
 
 POST /appointments/
+appointment.ts içindeki her şey (id hariç) -> {message}
 
-GET /notifications/customers/:id
+GET /notifications/customers/:id // notifications'lardan customer == :id olanlar
+yok -> {data:notifications[]}
 
-POST /notifications
 
-GET /comments/businesses/:id
-POST /comments/businesses/:id 
+GET /comments/businesses/:id  // comments'lerden customer == :id olanlar
+yok -> {data:comment[]}
+
+POST /comments/businesses
+comment.ts içindeki her şey (id hariç) -> {message}

@@ -49,6 +49,7 @@ export default function BusinessBottomBar() {
                         ></FontAwesomeIcon>
                     ),
                     tabBarLabel: "Yorumlar",
+                    
                 }}
             />
             <Tab.Screen

@@ -7,9 +7,11 @@ import { Notification } from "../../interfaces/Notification";
 import Notifications from "../../components/Notifications";
 import { API_URL } from "../../data/API_URL";
 import { AuthContext } from "../../context/AuthContext";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function NotificationsScreen() {
     const authContext = useContext(AuthContext);
+    const isFocused = useIsFocused();
 
     const [notifications, setNotifications] = useState<Notification[] | null>(
         null
@@ -26,9 +28,12 @@ export default function NotificationsScreen() {
                 handleFetchError(error);
             }
         }
-
+        if(isFocused){
         fetchNotifications();
-    }, []);
+        }else{
+            setNotifications(null);
+        }
+    }, [isFocused]);
 
     if (!notifications) {
         return <LoadingScreen></LoadingScreen>;

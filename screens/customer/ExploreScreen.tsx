@@ -8,8 +8,12 @@ import LoadingScreen from "../global/LoadingScreen";
 import HorizontalList from "../../components/HorizontalList";
 import VerticalList from "../../components/VerticalList";
 import { API_URL } from "../../data/API_URL";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function ExploreScreen() {
+
+    const isFocused = useIsFocused();
+
     const [businesses, setBusinesses] = useState<Business[] | null>(null);
 
     useEffect(() => {
@@ -22,9 +26,12 @@ export default function ExploreScreen() {
                 handleFetchError(error);
             }
         }
-
+        if(isFocused){
         fetchBusinesses();
-    }, []);
+        }else{
+            setBusinesses(null);
+        }
+    }, [isFocused]);
 
     if (!businesses) {
         return <LoadingScreen></LoadingScreen>;

@@ -20,9 +20,12 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { cities } from "../data/cities";
 import Toast from "react-native-toast-message";
 import { API_URL } from "../data/API_URL";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function AccountInformation() {
     const authContext = useContext(AuthContext);
+    const isFocused = useIsFocused();
+
     const [customer, setCustomer] = useState<Customer | null>(null);
     const [open, setOpen] = useState(false);
 
@@ -54,8 +57,12 @@ export default function AccountInformation() {
             }
         }
 
-        fetchCustomer();
-    }, [authContext]);
+        if (isFocused) {
+            fetchCustomer();
+        }else{
+            setCustomer(null);
+        }
+    }, [authContext, isFocused]);
 
     async function handleUpdateSubmit(
         values: Customer,

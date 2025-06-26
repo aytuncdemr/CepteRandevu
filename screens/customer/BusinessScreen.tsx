@@ -1,4 +1,4 @@
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useIsFocused, useRoute } from "@react-navigation/native";
 import { ScrollView } from "react-native";
 import { CustomerStackParamList } from "../../navigation/CustomerNavigation";
 import { useEffect, useState } from "react";
@@ -12,7 +12,8 @@ import { API_URL } from "../../data/API_URL";
 export default function BusinessScreen() {
     const route =
         useRoute<RouteProp<CustomerStackParamList, "BusinessScreen">>();
-    const id = route.params.id;
+    const isFocused = useIsFocused();
+        const id = route.params.id;
 
     const [business, setBusiness] = useState<Business | null>(null);
 
@@ -26,8 +27,12 @@ export default function BusinessScreen() {
                 handleFetchError(error);
             }
         }
+        if(isFocused){
         fetchBusiness();
-    }, []);
+        }else{
+            setBusiness(null);
+        }
+    }, [isFocused]);
 
     if (!business) {
         return <LoadingScreen></LoadingScreen>;

@@ -7,9 +7,11 @@ import { Business } from "../../interfaces/Business";
 import LoadingScreen from "../global/LoadingScreen";
 import { API_URL } from "../../data/API_URL";
 import BusinessCard from "../../components/BusinessCard";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function AccountScreen() {
     const authContext = useContext(AuthContext);
+    const isFocused = useIsFocused();
     const [business, setBusiness] = useState<Business | null>(null);
 
     useEffect(() => {
@@ -23,8 +25,12 @@ export default function AccountScreen() {
                 handleFetchError(error);
             }
         }
-        fetchBusiness();
-    }, []);
+        if (isFocused) {
+            fetchBusiness();
+        } else {
+            setBusiness(null);
+        }
+    }, [isFocused]);
 
     if (!business) {
         return <LoadingScreen></LoadingScreen>;
