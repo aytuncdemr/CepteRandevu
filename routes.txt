@@ -54,7 +54,6 @@ appointment.ts içindeki her şey (id hariç) -> {message}
 GET /notifications/customers/:id // notifications'lardan customer == :id olanlar
 yok -> {data:notifications[]}
 
-
 GET /comments/businesses/:id  // comments'lerden customer == :id olanlar
 yok -> {data:comment[]}
 

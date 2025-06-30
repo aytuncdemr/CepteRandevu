@@ -16,10 +16,10 @@ export default function RegisterForm({ isCustomer }: { isCustomer: boolean }) {
         account: Omit<Customer, "id"> | Omit<Business, "id">
     ) {
         try {
+            
             if (account.accountType === "business" && account.picture === "") {
                 throw new Error("Lütfen 1 adet fotoğraf yükleyiniz");
             }
-
             const { data } = await axios.post(
                 API_URL +
                     "/auth/register" +
