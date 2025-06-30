@@ -22,7 +22,7 @@ PUT /customers/:id
 customer.ts içindeki her şey -> {message}
 
 GET /customers/:id/favorites // kullanıcının favorilerinin bilgileri dönülecek
-yok -> {data:businesses[]}
+yok -> businesses[]
 
 POST /customers/:id/favorites/:id
 yok -> {message}
@@ -31,31 +31,31 @@ DELETE /customers/:id/favorites/:id
 yok -> {message}
 
 GET /businesses
-yok -> {data:businesses[]}
+yok -> businesses[]
 
 GET /businesses/:id
-yok -> {data:business}
+yok -> business
 
 PUT /businesses/:id
 business.ts içindeki her şey -> {message}
 
 GET /businesses/categories
-yok -> {data:string[]}
+yok -> string[]
 
 GET /appointments/customers/:id // appointments'lerden customer == :id olanlar
-yok -> {data:appointment[]}
+yok -> appointment[]
 
 GET /appointments/businesses/:id // appointments'lerden business == :id olanlar
-yok -> {data:appointment[]}
+yok -> appointment[]
 
 POST /appointments/
 appointment.ts içindeki her şey (id hariç) -> {message}
 
 GET /notifications/customers/:id // notifications'lardan customer == :id olanlar
-yok -> {data:notifications[]}
+yok -> notifications[]
 
 GET /comments/businesses/:id  // comments'lerden customer == :id olanlar
-yok -> {data:comment[]}
+yok -> comment[]
 
 POST /comments/businesses
 comment.ts içindeki her şey (id hariç) -> {message}

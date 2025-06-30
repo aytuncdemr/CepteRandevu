@@ -7,9 +7,6 @@ import { Pressable, SafeAreaView } from "react-native";
 import CustomerNavigation from "./CustomerNavigation";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-import { API_URL } from "../data/API_URL";
-import { useEffect } from "react";
 
 export type RootStackParamList = {
     LoginScreen: undefined;
@@ -21,26 +18,6 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootNavigation() {
-    useEffect(() => {
-        async function name() {
-            console.log("...");
-            try{
-            const { data } = await axios.get(
-                API_URL + "/businesses/categories",
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-            console.log("Data:",data);
-            }catch(error){
-                console.log(error);
-            }
-        }
-        name();
-    }, []);
-
     return (
         <SafeAreaView className="flex-1">
             <NavigationContainer

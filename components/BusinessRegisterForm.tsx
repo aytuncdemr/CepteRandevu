@@ -86,17 +86,10 @@ export function BusinessRegisterForm({
         async function getCategories() {
             try {
                 const { data } = await axios.get(
-                    API_URL + "/businesses/categories",
-                    {
-                        timeout: 5000,
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    }
+                    API_URL + "/businesses/categories"
                 );
                 setCategories(data);
             } catch (error) {
-                console.log(error);
                 handleFetchError(error);
             }
         }

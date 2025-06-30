@@ -24,8 +24,9 @@ export default function Comments({
         async function fetchComments() {
             try {
                 const { data } = await axios.get(
-                    API_URL + `/businesses/${business.id}/comments`
+                    API_URL + `/comments/businesses/${business.id}`
                 );
+                console.log(API_URL + ``)
                 setComments(data);
             } catch (error) {
                 handleFetchError(error);

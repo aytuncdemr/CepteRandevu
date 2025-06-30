@@ -21,7 +21,7 @@ export default function BusinessScreen() {
         async function fetchBusiness() {
             try {
                 const { data } = await axios.get(API_URL + `/businesses/${id}`);
-
+                console.log(data);
                 setBusiness(data);
             } catch (error) {
                 handleFetchError(error);
