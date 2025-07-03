@@ -7,16 +7,14 @@ main route: /api/v1
 POST /auth/login 
 {email,password} -> {id,accountType}
 
-POST /auth/register/business 
-business.ts içindeki her şey (id dışında) -> {message}
-POST /auth/register/customer 
-customer.ts içindeki her şey (id dışında) -> {message}
+POST /auth/register 
+business.ts-customer.ts içindeki her şey (id dışında) -> {message}
 
 POST /auth/reset-password
 {email} -> {message}
 
 GET /customers/:id
-yok -> {data:customer}
+yok -> customer
 
 PUT /customers/:id 
 customer.ts içindeki her şey -> {message}

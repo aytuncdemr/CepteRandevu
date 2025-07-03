@@ -61,7 +61,7 @@ export default function AddComment({
     }) {
         try {
             const { data } = await axios.post(
-                API_URL + "/comments/businesses/" + business.id,
+                API_URL + "/comments/businesses",
                 {
                     customer: authContext?.id,
                     business: business.id,
@@ -113,6 +113,10 @@ export default function AddComment({
                             <Text className=" text-gray-400 mb-2">Hizmet</Text>
                             <DropDownPicker
                                 listMode="SCROLLVIEW"
+                                translation={{
+                                    NOTHING_TO_SHOW:
+                                        "Gösterilecek bir seçenek yok",
+                                }}
                                 open={serviceOpen}
                                 value={values.service}
                                 items={business.services.map((s) => ({
@@ -163,6 +167,10 @@ export default function AddComment({
                         <View className="flex-1">
                             <Text className=" text-gray-400 mb-2">Çalışan</Text>
                             <DropDownPicker
+                            translation={{
+                                    NOTHING_TO_SHOW:
+                                        "Gösterilecek bir seçenek yok",
+                                }}
                                 listMode="SCROLLVIEW"
                                 open={workerOpen}
                                 value={values.worker}

@@ -55,6 +55,14 @@ export default function AppointmentsScreen({
                     </Text>
                 </View>
                 <View>
+                    {appointments.length === 0 && (
+                        <View>
+                            <Text className="text-center mt-12">
+                                Görünüşe göre herhangi bir randevunuz
+                                bulunmamakta
+                            </Text>
+                        </View>
+                    )}
                     <Appointments
                         isCustomer={isCustomer}
                         appointments={appointments}

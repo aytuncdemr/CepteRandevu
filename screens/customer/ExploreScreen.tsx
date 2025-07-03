@@ -11,7 +11,6 @@ import { API_URL } from "../../data/API_URL";
 import { useIsFocused } from "@react-navigation/native";
 
 export default function ExploreScreen() {
-
     const isFocused = useIsFocused();
 
     const [businesses, setBusinesses] = useState<Business[] | null>(null);
@@ -20,15 +19,14 @@ export default function ExploreScreen() {
         async function fetchBusinesses() {
             try {
                 const { data } = await axios.get(API_URL + "/businesses");
-
                 setBusinesses(data);
             } catch (error) {
                 handleFetchError(error);
             }
         }
-        if(isFocused){
-        fetchBusinesses();
-        }else{
+        if (isFocused) {
+            fetchBusinesses();
+        } else {
             setBusinesses(null);
         }
     }, [isFocused]);

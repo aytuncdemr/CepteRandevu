@@ -1,18 +1,14 @@
 import { Text, View, TextInput, Pressable, ScrollView } from "react-native";
 import getTodayDate from "../utils/getTodayDate";
 import { Customer } from "../interfaces/Customer";
-import handleFetchError from "../utils/handleFetchError";
-import axios from "axios";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import DropDownPicker from "react-native-dropdown-picker";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { cities } from "../data/cities";
 import { Business } from "../interfaces/Business";
-import LoadingScreen from "../screens/global/LoadingScreen";
 import Toast from "react-native-toast-message";
 import ImageUploader from "./ImageUploader";
-import { API_URL } from "../data/API_URL";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
     faBusinessTime,
@@ -21,6 +17,7 @@ import {
     faCalendarDay,
     faConciergeBell,
 } from "@fortawesome/free-solid-svg-icons";
+import { categories } from "../data/categories";
 
 export function BusinessRegisterForm({
     registerAccountHandler,
@@ -75,30 +72,12 @@ export function BusinessRegisterForm({
 
     const [categoryOpen, setCategoryOpen] = useState(false);
     const [cityOpen, setCityOpen] = useState(false);
-    const [categories, setCategories] = useState<string[] | null>(null);
     const [newWorkerName, setNewWorkerName] = useState<string>("");
     const [newWorkDay, setNewWorkDay] = useState<string>("");
     const [newWorkHour, setNewWorkHour] = useState<string>("");
     const [newServiceTitle, setNewServiceTitle] = useState<string>("");
     const [newServicePrice, setNewServicePrice] = useState<string>("");
 
-    useEffect(() => {
-        async function getCategories() {
-            try {
-                const { data } = await axios.get(
-                    API_URL + "/businesses/categories"
-                );
-                setCategories(data);
-            } catch (error) {
-                handleFetchError(error);
-            }
-        }
-        getCategories();
-    }, []);
-
-    if (!categories) {
-        return <LoadingScreen></LoadingScreen>;
-    }
     return (
         <>
             <View>
@@ -565,7 +544,7 @@ export function BusinessRegisterForm({
                                         <View className="flex-row gap-2 mt-4">
                                             <TextInput
                                                 className="text-input flex-1 h-[20px]"
-                                                placeholder="Yeni çalışma günü"
+                                                placeholder="Yeni çalışma Saati"
                                                 value={newWorkHour}
                                                 onChangeText={setNewWorkHour}
                                             />

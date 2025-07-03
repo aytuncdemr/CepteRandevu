@@ -28,9 +28,9 @@ export default function NotificationsScreen() {
                 handleFetchError(error);
             }
         }
-        if(isFocused){
-        fetchNotifications();
-        }else{
+        if (isFocused) {
+            fetchNotifications();
+        } else {
             setNotifications(null);
         }
     }, [isFocused]);
@@ -47,6 +47,13 @@ export default function NotificationsScreen() {
                         Bildirimler
                     </Text>
                 </View>
+                {notifications.length === 0 && (
+                    <View>
+                        <Text className="text-center mt-12">
+                            Görünüşe göre herhangi bir bildiriminiz yok
+                        </Text>
+                    </View>
+                )}
                 <Notifications notifications={notifications}></Notifications>
             </View>
         </ScrollView>

@@ -1,1 +1,1 @@
-export const API_URL = "https://cepterandevu-backend.onrender.com/api/v1";
+export const API_URL = "https://cepterandevu-backend-production.up.railway.app/api/v1";

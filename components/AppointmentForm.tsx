@@ -109,6 +109,10 @@ export default function AppointmentForm({ business }: { business: Business }) {
                         <Text style={styles.label}>Hizmet</Text>
                         <DropDownPicker
                             listMode="SCROLLVIEW"
+                            translation={{
+                                    NOTHING_TO_SHOW:
+                                        "Gösterilecek bir seçenek yok",
+                                }}
                             open={serviceOpen}
                             value={values.service}
                             items={business.services.map((s) => ({
@@ -143,6 +147,10 @@ export default function AppointmentForm({ business }: { business: Business }) {
                     <View style={styles.inputGroup}>
                         <Text style={styles.label}>Çalışan</Text>
                         <DropDownPicker
+                        translation={{
+                                    NOTHING_TO_SHOW:
+                                        "Gösterilecek bir seçenek yok",
+                                }}
                             listMode="SCROLLVIEW"
                             open={employeeOpen}
                             value={values.employee}
@@ -178,6 +186,10 @@ export default function AppointmentForm({ business }: { business: Business }) {
                     <View style={styles.inputGroup}>
                         <Text style={styles.label}>Tarih</Text>
                         <DropDownPicker
+                        translation={{
+                                    NOTHING_TO_SHOW:
+                                        "Gösterilecek bir seçenek yok",
+                                }}
                             listMode="SCROLLVIEW"
                             open={dateOpen}
                             value={values.date}
@@ -211,6 +223,10 @@ export default function AppointmentForm({ business }: { business: Business }) {
                     <View style={styles.inputGroup}>
                         <Text style={styles.label}>Saat</Text>
                         <DropDownPicker
+                        translation={{
+                                    NOTHING_TO_SHOW:
+                                        "Gösterilecek bir seçenek yok",
+                                }}
                             listMode="SCROLLVIEW"
                             open={hourOpen}
                             value={values.hour}

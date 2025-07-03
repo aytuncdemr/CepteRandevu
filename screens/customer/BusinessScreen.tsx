@@ -13,7 +13,7 @@ export default function BusinessScreen() {
     const route =
         useRoute<RouteProp<CustomerStackParamList, "BusinessScreen">>();
     const isFocused = useIsFocused();
-        const id = route.params.id;
+    const id = route.params.id;
 
     const [business, setBusiness] = useState<Business | null>(null);
 
@@ -21,15 +21,14 @@ export default function BusinessScreen() {
         async function fetchBusiness() {
             try {
                 const { data } = await axios.get(API_URL + `/businesses/${id}`);
-                console.log(data);
                 setBusiness(data);
             } catch (error) {
                 handleFetchError(error);
             }
         }
-        if(isFocused){
-        fetchBusiness();
-        }else{
+        if (isFocused) {
+            fetchBusiness();
+        } else {
             setBusiness(null);
         }
     }, [isFocused]);

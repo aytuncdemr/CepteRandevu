@@ -3,6 +3,7 @@ import Toast from "react-native-toast-message";
 
 export default function handleFetchError(error: unknown) {
     Toast.hide();
+    console.log(error);
     if (isAxiosError(error)) {
         Toast.show({
             type: "error",

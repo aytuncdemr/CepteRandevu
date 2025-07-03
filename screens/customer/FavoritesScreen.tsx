@@ -41,11 +41,13 @@ export default function FavoritesScreen() {
                 <Text className="big-heading text-violet-600">Favoriler</Text>
             </View>
             <View className="mb-4">
-                <View className="mb-1">
-                    <Text className="text-2xl mt-4 text-violet-600">
-                        Favori işletmeler
-                    </Text>
-                </View>
+                {businesses.length === 0 && (
+                    <View>
+                        <Text className="text-center mt-12">
+                            Görünüşe göre herhangi bir favori işletmeniz yok
+                        </Text>
+                    </View>
+                )}
                 <VerticalList
                     isFavorites
                     setBusinesses={setBusinesses}

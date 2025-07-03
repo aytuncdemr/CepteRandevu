@@ -40,7 +40,7 @@ Frontend - (Aytunç Demir)
 
 ✅ FontAwesome
 
-Backend - (Mert Temiz)
+Backend - (Aytunç Demir)
 
 ✅ Nodejs
 
