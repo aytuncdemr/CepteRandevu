@@ -50,6 +50,14 @@ Backend - (Aytunç Demir)
 
 ✅ Firebase (firestore,storage,auth)
 
+Yapay Zeka - (Mehmet Fatih Top)
+
+✅ Tensorflow
+
+✅ Python
+
+✅ Django
+
 Dizayn - (Ahmet Eren Yavaş)
 
 ✅ Figma
@@ -62,10 +70,10 @@ Yönetim/ Aytunç Demir
 
 Frontend/ Aytunç Demir
 
-Backend/ Mert Temiz
+Backend/ Aytunç Demir
 
 Yapay Zeka/ Mehmet Fatih Top
 
 Dizayn/ Ahmet Eren Yavaş
 
-Test/ Ahmet Eren Yavaş ve Mehmet Fatih Top
+Test/ Ahmet Eren Yavaş

@@ -30,11 +30,10 @@ export default function SearchBar({
             const id = setTimeout(async () => {
                 try {
                     const { data } = await axios.post(
-                        "https://son-u6p2.onrender.com/api/v1/search",
+                        "https://son-z0vx.onrender.com/api/v1/search",
                         { query }
                     );
-
-                    setAICategories(data);
+                    setAICategories(data.results);
                 } catch (error) {
                     handleFetchError(error);
                 }

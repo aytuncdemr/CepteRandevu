@@ -42,7 +42,7 @@ export default function Stars({
                     className="text-gray-600"
                     style={isHorizontal ? { marginTop: 4 } : { marginTop: 6 }}
                 >
-                    ({averageStar})
+                    ({Math.round(averageStar)})
                 </Text>
             )}
         </View>
