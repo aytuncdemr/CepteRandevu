@@ -56,11 +56,17 @@ Yapay Zeka - (Mehmet Fatih Top)
 
 ✅ Python
 
-✅ Django
+✅ Flask
+
+✅ Render (deployment)
 
 Dizayn - (Ahmet Eren Yavaş)
 
 ✅ Figma
+
+✅ Figjam
+
+✅ UI/UX Design
 
 ✅ Slack
 
